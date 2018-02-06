@@ -24,9 +24,9 @@ add_dependencies(adem exts)
 
 set_target_properties( adem
     PROPERTIES
-    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/lib"
-    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/lib"
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin"
+    ARCHIVE_OUTPUT_DIRECTORY "${ROOT_DIR}/build/adon/adem/lib"
+    LIBRARY_OUTPUT_DIRECTORY "${ROOT_DIR}/build/adon/adem/lib"
+    RUNTIME_OUTPUT_DIRECTORY "${ROOT_DIR}/build/adon/adem/bin"
 )
 
 add_subdirectory(test)
