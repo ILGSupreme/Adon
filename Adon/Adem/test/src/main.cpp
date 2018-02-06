@@ -2,5 +2,6 @@
 
 int main(char args[])
 {
-	return 1;
+	int a = testlib();
+	return a;
 }

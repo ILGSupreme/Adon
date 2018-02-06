@@ -1,3 +1,3 @@
-#include <iostream>
+#pragma once
 
-int testlib();
+int __declspec(dllexport) testlib();
