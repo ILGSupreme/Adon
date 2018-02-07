@@ -1,5 +1,9 @@
 PROJECT(Adem) #Adon Entity Manager
 
+add_definitions(
+  -DHAVE_CONFIG_H=1
+)
+
 SET(INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
 SET(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
@@ -12,6 +16,8 @@ SET(ADEM_SOURCE_FILES ${APP_SOURCE})
 SET(ADEM_HEADER_FILES ${APP_HEAD})
 SET(ADEM_INCLUDE_FILES ${APP_INCLUDE_HEAD})
 
+message(STATUS "XERCES_DIR=${XERCES_DIR}")
+
 include_directories(${SOURCE_DIR})
 
 SOURCE_GROUP("Source" FILES ${ADEM_SOURCE_FILES})
@@ -19,8 +25,8 @@ SOURCE_GROUP("Header" FILES ${ADEM_HEADER_FILES})
 SOURCE_GROUP("Include" FILES ${ADEM_INCLUDE_FILES})
 
 add_library(adem SHARED ${ADEM_FILES})
-target_link_libraries(adem exts)
-add_dependencies(adem exts)
+target_link_libraries(adem xerces-c exts)
+add_dependencies(adem xerces-c)
 
 set_target_properties( adem
     PROPERTIES

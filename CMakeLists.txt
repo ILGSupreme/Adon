@@ -1,5 +1,7 @@
 project(Labbar)
 set(ROOT_DIR ${CMAKE_SOURCE_DIR})
+SET(XERCES_DIR ${CMAKE_SOURCE_DIR}/exts/xerces-c-3.2.0)
+SET(XERCES_BINARY_DIR ${CMAKE_BINARY_DIR}/exts/xerces-c-3.2.0)
 cmake_minimum_required(VERSION 3.2)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
