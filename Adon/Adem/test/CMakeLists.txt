@@ -1,11 +1,17 @@
 project(adem_tests)
 
-SET(TESTFILES_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
-SET(ADEM_LIB_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/.../bin/debug)
+SET(TESTFILES_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
+SET(XML_TESTFILES_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
-FILE(GLOB TEST_FILES ${TESTFILES_DIR}/*.cpp)
+message(STATUS "XML_TESTFILES_DIR=${XML_TESTFILES_DIR}")
 
-add_executable(adem_tests ${TEST_FILES})
+FILE(GLOB TEST_FILES ${TESTFILES_SOURCE_DIR}/*.cpp)
+FILE(GLOB XML_FILES ${XML_TESTFILES_DIR}/*.xml)
+
+SOURCE_GROUP("Source" FILES ${TEST_FILES})
+SOURCE_GROUP("XML" FILES ${XML_FILES})
+
+add_executable(adem_tests ${TEST_FILES} ${XML_FILES})
 include_directories(adem)
 target_link_libraries(adem_tests adem)
 add_dependencies(adem_tests adem)
