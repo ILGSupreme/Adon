@@ -24,7 +24,7 @@ SOURCE_GROUP("Source" FILES ${ADEM_SOURCE_FILES})
 SOURCE_GROUP("Header" FILES ${ADEM_HEADER_FILES})
 SOURCE_GROUP("Include" FILES ${ADEM_INCLUDE_FILES})
 
-add_library(adem SHARED ${ADEM_FILES})
+add_library(adem STATIC ${ADEM_FILES})
 target_link_libraries(adem tinyxml2 exts)
 add_dependencies(adem tinyxml2)
 
