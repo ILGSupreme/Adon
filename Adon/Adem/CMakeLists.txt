@@ -1,9 +1,5 @@
 PROJECT(Adem) #Adon Entity Manager
 
-#add_definitions(
-#  -DHAVE_CONFIG_H=1
-#)
-
 SET(INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
 SET(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
@@ -16,7 +12,7 @@ SET(ADEM_SOURCE_FILES ${APP_SOURCE})
 SET(ADEM_HEADER_FILES ${APP_HEAD})
 SET(ADEM_INCLUDE_FILES ${APP_INCLUDE_HEAD})
 
-#message(STATUS "XERCES_DIR=${XERCES_DIR}")
+message(STATUS "ADEM_HEADER_FILES=${ADEM_HEADER_FILES}")
 
 include_directories(${SOURCE_DIR})
 
@@ -34,6 +30,9 @@ set_target_properties( adem
     LIBRARY_OUTPUT_DIRECTORY "${ROOT_DIR}/build/adon/adem/lib"
     RUNTIME_OUTPUT_DIRECTORY "${ROOT_DIR}/build/adon/adem/bin"
 )
+
+#add_custom_command(TARGET adem POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different "$<TARGET_FILE:adem>" ${ROOT_DIR}/android/app/libs/adem.lib)
+#add_custom_command(TARGET adem POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different ${ADEM_HEADER_FILES} ${ROOT_DIR}/android/app/src/adem.h)
 
 add_subdirectory(test)
 

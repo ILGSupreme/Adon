@@ -1,9 +1,10 @@
 #include "adem.h"
 #include <iostream>
+#include <tinyxml2.h>
 
 using namespace tinyxml2;
 
-tinyxml2::XMLError Adon::Adem::LoadObjectsFromFile(const char* filename)
+int Adon::Adem::LoadObjectsFromFile(const char* filename)
 {
 	XMLDocument xmlDoc;
 	XMLError err = xmlDoc.LoadFile(filename);
@@ -11,14 +12,14 @@ tinyxml2::XMLError Adon::Adem::LoadObjectsFromFile(const char* filename)
 	switch (err)
 	{
 	case tinyxml2::XML_SUCCESS:
-		printf("SUCCESS \n");
+		//printf("SUCCESS \n");
 		break;
 	case tinyxml2::XML_NO_ATTRIBUTE:
-		printf("NO ATTRIBUTES \n");
+		//printf("NO ATTRIBUTES \n");
 		err = tinyxml2::XML_NO_ATTRIBUTE;
 		break;
 	case tinyxml2::XML_WRONG_ATTRIBUTE_TYPE:
-		printf("WRONG ATTRIBUTE \n");
+		//printf("WRONG ATTRIBUTE \n");
 		err = tinyxml2::XML_WRONG_ATTRIBUTE_TYPE;
 		break;
 	case tinyxml2::XML_ERROR_FILE_NOT_FOUND:
