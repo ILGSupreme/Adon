@@ -23,6 +23,8 @@ int Adon::Adem::LoadObjectsFromFile(const char* filename)
 		err = tinyxml2::XML_WRONG_ATTRIBUTE_TYPE;
 		break;
 	case tinyxml2::XML_ERROR_FILE_NOT_FOUND:
+		printf("FILE NOT FOUND \n");
+		err = tinyxml2::XML_ERROR_FILE_NOT_FOUND;
 		break;
 	case tinyxml2::XML_ERROR_FILE_COULD_NOT_BE_OPENED:
 		break;

@@ -1,12 +1,16 @@
-#include "adem.h"
+#include <adem.h>
 #include <iostream>
+#include <cstdio>
 
-int main(int argc,char *args[])
+int main()
 {
-	printf(args[1]);
-	std::cout << args[1]<< std::endl;
-	char* filename = args[1];
+	//std::std::cout << "TEST" << '\n';
+	//const char* argument1 = args[1];
+	//printf("%s",argument1);
+	//std::cout << args[1]<< std::endl;
+	const char* filename = "xmltestfile.xml";
 	//memcpy(filename, args[1],sizeof(32));
 	int eerr = Adon::Adem::LoadObjectsFromFile(filename);
-	return eerr;
+	printf("%d hej \n", eerr);
+	return 1;
 }
