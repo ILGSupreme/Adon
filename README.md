@@ -1,1 +1,3 @@
-A Simple Game Engine made in C++.
+A Simple Graphical Interface Application.
+
+More info to come.
