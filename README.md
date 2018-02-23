@@ -1,3 +1,5 @@
-A Simple Graphical Interface Application.
+Adon is a project to create a lightweight engine that is able to create cross platform applications with simple scripting and graphical UI.
 
-More info to come.
+More info to come
+
+Samuel Padilla
