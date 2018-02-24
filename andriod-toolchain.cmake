@@ -1,8 +1,0 @@
-SET(CMAKE_SYSTEM_NAME android)
-SET(CMAKE_SYSTEM_VERSION 19)
-SET(CMAKE_SYSROOT C:/Users/Samuel/Android_ToolChain/bin)
-SET(CMAKE_C_COMPILER c:/Users/Samuel/Android-ToolChain/bin/arm-linux-androideabi-clang)
-SET(CMAKE_CXX_COMPILER c:/Users/Samuel/Android-ToolChain/bin/arm-linux-androideabi-clang++)
-SET(CMAKE_C_COMPILER_TARGET c:/Users/Samuel/Android-ToolChain/bin/arm-linux-androideabi-clang)
-SET(CMAKE_CXX_COMPILER_TARGET c:/Users/Samuel/Android-ToolChain/bin/arm-linux-androideabi-clang++)
-SET(CMAKE_FIND_ROOT_PATH c:/Users/Samuel/Android-ToolChain)

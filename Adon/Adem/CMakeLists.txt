@@ -20,21 +20,43 @@ SOURCE_GROUP("Source" FILES ${ADEM_SOURCE_FILES})
 SOURCE_GROUP("Header" FILES ${ADEM_HEADER_FILES})
 SOURCE_GROUP("Include" FILES ${ADEM_INCLUDE_FILES})
 
-add_library(adem STATIC ${ADEM_FILES})
+if(BUILD_STATIC_LIBS)
+add_library(adem_static STATIC ${ADEM_FILES})
+target_link_libraries(adem_static tinyxml2_static exts)
+add_dependencies(adem_static tinyxml2_static)
+
+set_target_properties(adem_static
+    PROPERTIES
+    ARCHIVE_OUTPUT_DIRECTORY "${ROOT_DIR}/output/adon/adem/lib"
+    LIBRARY_OUTPUT_DIRECTORY "${ROOT_DIR}/output/adon/adem/lib"
+    RUNTIME_OUTPUT_DIRECTORY "${ROOT_DIR}/output/adon/adem/bin"
+)
+endif()
+
+MESSAGE(STATUS "CMAKE_C_COMPILER_TARGET=${CMAKE_C_COMPILER_TARGET}")
+MESSAGE(STATUS "CMAKE_C_COMPILER_EXTERNAL_TOOLCHAIN=${CMAKE_C_COMPILER_EXTERNAL_TOOLCHAIN}")
+MESSAGE(STATUS "ANDROID_AR=${ANDROID_AR}")
+MESSAGE(STATUS "ANDROID_RANLIB=${ANDROID_RANLIB}")
+MESSAGE(STATUS "ANDROID_ABI=${ANDROID_ABI}")
+
+if(BUILD_SHARED_LIBS)
+add_library(adem SHARED ${ADEM_FILES})
 target_link_libraries(adem tinyxml2 exts)
 add_dependencies(adem tinyxml2)
-
-set_target_properties( adem
-    PROPERTIES
-    ARCHIVE_OUTPUT_DIRECTORY "${ROOT_DIR}/build/adon/adem/lib"
-    LIBRARY_OUTPUT_DIRECTORY "${ROOT_DIR}/build/adon/adem/lib"
-    RUNTIME_OUTPUT_DIRECTORY "${ROOT_DIR}/build/adon/adem/bin"
+	set_target_properties(adem
+	PROPERTIES
+	ARCHIVE_OUTPUT_DIRECTORY "${ROOT_DIR}/output/adon/adem/lib/${ANDROID_ABI}"
+	LIBRARY_OUTPUT_DIRECTORY "${ROOT_DIR}/output/adon/adem/lib/${ANDROID_ABI}"
+	RUNTIME_OUTPUT_DIRECTORY "${ROOT_DIR}/output/adon/adem/bin/${ANDROID_ABI}"
 )
-
-#add_custom_command(TARGET adem POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different "$<TARGET_FILE:adem>" ${ROOT_DIR}/android/app/libs/adem.lib)
-#add_custom_command(TARGET adem POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different ${ADEM_HEADER_FILES} ${ROOT_DIR}/android/app/src/adem.h)
+endif()
 
 add_subdirectory(test)
 
+if(BUILD_STATIC_LIBS)
+SET_TARGET_PROPERTIES(adem_static PROPERTIES FOLDER "Adon/Adem")
+endif()
+if(BUILD_SHARED_LIBS)
 SET_TARGET_PROPERTIES(adem PROPERTIES FOLDER "Adon/Adem")
+endif()
 SET_TARGET_PROPERTIES(adem_tests PROPERTIES FOLDER "Adon/Adem/tests")
