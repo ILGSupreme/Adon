@@ -1,0 +1,38 @@
+#!/bin/bash
+
+CMAKE_EXE_PATH=$1
+MAKE_EXE_PATH=$2
+CMAKE_BUILD_TYPE=$3
+BUILD_ALL_ABI=$4
+ANDROID_NDK_PATH=$5
+ANDROID_API_LEVEL=$6
+ANDROID_ABI=$7
+ANDROID_STL=$8
+ANDROID_TOOLCHAIN_FILE="android.toolchain.cmake"
+
+shopt -s cdable_vars
+
+if [[ ! -n $BUILD_ALL_ABI ]] && [[ -z $BUILD_ALL_ABI ]]
+then
+	BUILD_ALL_ABI="true"
+fi
+
+BUILD_DIR="build/android/"
+
+if [ ! -d "$BUILD_DIR" ]
+then
+	mkdir -f $BUILD_DIR
+	cd $BUILD_DIR
+else
+	cd $BUILD_DIR
+fi
+
+if [ ! -z $BUILD_ALL_ABI ]
+then
+for ABI in "x86" "x86_64" "arm64-v8a" "armeabi-v7a"
+do
+	eval $CMAKE_EXE_PATH -G "Unix\ Makefiles" -DCMAKE_TOOLCHAIN_FILE=$ANDROID_TOOLCHAIN_FILE ../../ -DCMAKE_MAKE_PROGRAM=$MAKE_EXE_PATH -DCMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -DANDROID_NATIVE_API_LEVEL=$ANDROID_API_LEVEL -DANDROID_NDK=$ANDROID_NDK_PATH -DANDROID_ABI=$ABI -DANDROID_STL=$ANDROID_STL
+	eval $CMAKE_EXE_PATH --build .
+done
+exit
+fi

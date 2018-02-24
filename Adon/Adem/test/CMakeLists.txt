@@ -3,8 +3,6 @@ project(adem_tests)
 SET(TESTFILES_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 SET(XML_TESTFILES_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
-message(STATUS "XML_TESTFILES_DIR=${XML_TESTFILES_DIR}")
-
 FILE(GLOB TEST_FILES ${TESTFILES_SOURCE_DIR}/*.cpp)
 FILE(GLOB XML_FILES ${XML_TESTFILES_DIR}/*.xml)
 
@@ -25,9 +23,9 @@ target_link_libraries(adem_tests adem)
 add_dependencies(adem_tests adem)
 endif()
 
-set_target_properties( adem_tests
+set_target_properties(adem_tests
     PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${ROOT_DIR}/output/adon/adem/test/bin"
+    RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BIN_DIR}/adon/adem/tests/${CMAKE_BUILD_TYPE}"
 )
 
 if(BUILD_SHARED_LIBS)

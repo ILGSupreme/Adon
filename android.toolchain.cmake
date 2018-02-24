@@ -64,15 +64,10 @@ else()
 endif()
 file(TO_CMAKE_PATH "${ANDROID_NDK}" ANDROID_NDK)
 
-message(STATUS "ANDROID_NDK=${ANDROID_NDK}")
-
 if(${ANDROID_NDK})
 else()
 SET(ANDROID_NDK "C:/Users/Samuel/android-ndk-r16b-windows-x86_64/android-ndk-r16b")
 endif()
-#SET(ANDROID_NDK "C:/Users/Samuel/android-ndk-r16b-windows-x86_64/android-ndk-r16b")
-#set(ANDROID_ABI x86_64)
-#SET(ANDROID_STL c++_shared)
 
 # Android NDK revision
 file(READ "${ANDROID_NDK}/source.properties" ANDROID_NDK_SOURCE_PROPERTIES)
