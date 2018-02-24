@@ -1,0 +1,6 @@
+[submodule "extensions/angle"]
+	path = extensions/angle
+	url = https://github.com/google/angle.git
+[submodule "extensions/tinyxml2"]
+	path = extensions/tinyxml2
+	url = git@github.com:leethomason/tinyxml2.git
