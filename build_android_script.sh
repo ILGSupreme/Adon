@@ -1,7 +1,5 @@
 #!/bin/bash
 
-INSTALL_DIR = "C:\Repositories\Adon\output\lib"
-
 echo "sourcing config file"
 
 source config.cfg
