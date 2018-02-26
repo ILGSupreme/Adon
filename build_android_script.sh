@@ -1,38 +1,36 @@
 #!/bin/bash
 
-CMAKE_EXE_PATH=$1
-MAKE_EXE_PATH=$2
-CMAKE_BUILD_TYPE=$3
-BUILD_ALL_ABI=$4
-ANDROID_NDK_PATH=$5
-ANDROID_API_LEVEL=$6
-ANDROID_ABI=$7
-ANDROID_STL=$8
-ANDROID_TOOLCHAIN_FILE="android.toolchain.cmake"
+INSTALL_DIR = "C:\Repositories\Adon\output\lib"
 
-shopt -s cdable_vars
+echo "sourcing config file"
+
+source config.cfg
+
+echo "checking build type"
 
 if [[ ! -n $BUILD_ALL_ABI ]] && [[ -z $BUILD_ALL_ABI ]]
 then
 	BUILD_ALL_ABI="true"
 fi
 
-BUILD_DIR="build/android/"
+echo "checking if directory exists, else build it"
 
-if [ ! -d "$BUILD_DIR" ]
+if [ ! -d "$ANDRIOD_BUILD_DIR" ]
 then
-	mkdir -f $BUILD_DIR
-	cd $BUILD_DIR
+	mkdir -p $ANDRIOD_BUILD_DIR
+	cd $ANDRIOD_BUILD_DIR
 else
-	cd $BUILD_DIR
+	cd $ANDRIOD_BUILD_DIR
 fi
+
+echo "executing build"
 
 if [ ! -z $BUILD_ALL_ABI ]
 then
 for ABI in "x86" "x86_64" "arm64-v8a" "armeabi-v7a"
 do
-	eval $CMAKE_EXE_PATH -G "Unix\ Makefiles" -DCMAKE_TOOLCHAIN_FILE=$ANDROID_TOOLCHAIN_FILE ../../ -DCMAKE_MAKE_PROGRAM=$MAKE_EXE_PATH -DCMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -DANDROID_NATIVE_API_LEVEL=$ANDROID_API_LEVEL -DANDROID_NDK=$ANDROID_NDK_PATH -DANDROID_ABI=$ABI -DANDROID_STL=$ANDROID_STL
-	eval $CMAKE_EXE_PATH --build .
+COMMAND_CMAKE_BUILD="eval $CMAKE_EXE_PATH -G Unix\ Makefiles -DCMAKE_TOOLCHAIN_FILE=$ANDROID_TOOLCHAIN_FILE ../../ -DCMAKE_MAKE_PROGRAM=$MAKE_EXE_PATH -DCMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -DANDROID_NATIVE_API_LEVEL=$ANDROID_API_LEVEL -DANDROID_NDK=$ANDROID_NDK_PATH -DANDROID_ABI=$ABI -DANDROID_STL=$ANDROID_STL -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR"
+$COMMAND_CMAKE_BUILD || exit 1
+eval $CMAKE_EXE_PATH --build . || exit 1
 done
-exit
 fi

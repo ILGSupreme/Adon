@@ -1,5 +1,7 @@
 PROJECT(Adem) #Adon Entity Manager
 
+include(GenerateExportHeader)
+
 SET(INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
 SET(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
@@ -12,8 +14,6 @@ SET(ADEM_SOURCE_FILES ${APP_SOURCE})
 SET(ADEM_HEADER_FILES ${APP_HEAD})
 SET(ADEM_INCLUDE_FILES ${APP_INCLUDE_HEAD})
 
-message(STATUS "ADEM_HEADER_FILES=${ADEM_HEADER_FILES}")
-
 include_directories(${SOURCE_DIR})
 
 SOURCE_GROUP("Source" FILES ${ADEM_SOURCE_FILES})
@@ -23,7 +23,9 @@ SOURCE_GROUP("Include" FILES ${ADEM_INCLUDE_FILES})
 if(BUILD_STATIC_LIBS)
 add_library(adem_static STATIC ${ADEM_FILES})
 target_link_libraries(adem_static tinyxml2_static exts)
+generate_export_header(adem_static EXPORT_FILE_NAME ${PROJECT_EXPORT_DIR}/adon_export.h)
 add_dependencies(adem_static tinyxml2_static)
+target_include_directories(adem_static PUBLIC ${PROJECT_EXPORT_DIR})
 
 set_target_properties(adem_static
     PROPERTIES
@@ -33,22 +35,19 @@ set_target_properties(adem_static
 )
 endif()
 
-MESSAGE(STATUS "CMAKE_C_COMPILER_TARGET=${CMAKE_C_COMPILER_TARGET}")
-MESSAGE(STATUS "CMAKE_C_COMPILER_EXTERNAL_TOOLCHAIN=${CMAKE_C_COMPILER_EXTERNAL_TOOLCHAIN}")
-MESSAGE(STATUS "ANDROID_AR=${ANDROID_AR}")
-MESSAGE(STATUS "ANDROID_RANLIB=${ANDROID_RANLIB}")
-MESSAGE(STATUS "ANDROID_ABI=${ANDROID_ABI}")
-
 if(BUILD_SHARED_LIBS)
 add_library(adem SHARED ${ADEM_FILES})
 target_link_libraries(adem tinyxml2 exts)
+generate_export_header(adem EXPORT_FILE_NAME ${PROJECT_EXPORT_DIR}/adon_export.h)
 add_dependencies(adem tinyxml2)
-	set_target_properties(adem
+target_include_directories(adem PUBLIC ${PROJECT_EXPORT_DIR})
+set_target_properties(adem
 	PROPERTIES
 	ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_LIB_DIR}/${CMAKE_BUILD_TYPE}/${ANDROID_PLATFORM}/${ANDROID_ABI}"
 	LIBRARY_OUTPUT_DIRECTORY "${PROJECT_LIB_DIR}/${CMAKE_BUILD_TYPE}/${ANDROID_PLATFORM}/${ANDROID_ABI}"
 	RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BIN_DIR}/${CMAKE_BUILD_TYPE}/${ANDROID_PLATFORM}/${ANDROID_ABI}"
 )
+
 endif()
 
 add_subdirectory(test)
