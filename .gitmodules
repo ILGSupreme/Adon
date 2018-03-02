@@ -1,3 +1,6 @@
 [submodule "extensions/tinyxml2"]
 	path = extensions/tinyxml2
 	url = git@github.com:leethomason/tinyxml2.git
+[submodule "extensions/glfw"]
+	path = extensions/glfw
+	url = git@github.com:glfw/glfw.git
