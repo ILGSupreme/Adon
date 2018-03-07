@@ -5,3 +5,6 @@
 	path = extensions/glfw
 	url = git@github.com:glfw/glfw.git
 	branch = latest
+[submodule "extensions/glad"]
+	path = extensions/glad
+	url = git@github.com:Dav1dde/glad.git

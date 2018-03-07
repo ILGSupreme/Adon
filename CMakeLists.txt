@@ -1,11 +1,40 @@
 cmake_minimum_required(VERSION 3.2)
 
-PROJECT(Labbar)
+PROJECT(AdonEngine)
 
+#Find OpenGL, different for each type of OS
+if(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+
+find_package(OpenGL)
+message(STATUS "OPENGL_LIBRARIES=${OPENGL_LIBRARIES}")
+message(STATUS "OPENGL_INCLUDE_DIR=${OPENGL_INCLUDE_DIR}")
+message(STATUS "OPENGL_GLU_FOUND=${OPENGL_GLU_FOUND}")
+message(STATUS "OPENGL_XMESA_FOUND=${OPENGL_XMESA_FOUND}")
+message(STATUS "OPENGL_gl_LIBRARY=${OPENGL_gl_LIBRARY}")
+message(STATUS "OPENGL_glu_LIBRARY=${OPENGL_glu_LIBRARY}")
+
+elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+elseif(${CMAKE_SYSTEM_NAME} MATCHES "Android")
+endif()
+
+#DIRECTORY VARIABLES
 SET(ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 SET(PROJECT_LIB_DIR ${ROOT_DIR}/output/lib)
 SET(PROJECT_BIN_DIR ${ROOT_DIR}/output/bin)
 SET(PROJECT_EXPORT_DIR ${ROOT_DIR}/output/exports)
+SET(GLAD_INCLUDES_DIR
+	${CMAKE_CURRENT_SOURCE_DIR}/extensions/glad
+	${CMAKE_CURRENT_SOURCE_DIR}/extensions/glad/src
+	${CMAKE_CURRENT_SOURCE_DIR}/extensions/glad/include)
+	
+#GLOBAL FILES
+FILE(GLOB GLAD_FILES
+${CMAKE_CURRENT_SOURCE_DIR}/extensions/glad/src/glad.c 
+${CMAKE_CURRENT_SOURCE_DIR}/extensions/glad/include/glad/glad.h
+${CMAKE_CURRENT_SOURCE_DIR}/extensions/glad/include/KHR/khrplatform.h)
+
+
 
 SET_PROPERTY(GLOBAL PROPERTY USE_FOLDERS ON)
 
