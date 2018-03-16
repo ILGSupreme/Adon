@@ -1,7 +1,7 @@
 #include "adwin.h"
-#include <iostream>
-#include <glad\glad.h>
-#include <GLFW\glfw3.h>
+#include <cstdio>
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 
 ADWIN_EXPORT void Adon::AdWin::testfunction()
 {

@@ -23,19 +23,16 @@ SET(ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 SET(PROJECT_LIB_DIR ${ROOT_DIR}/output/lib)
 SET(PROJECT_BIN_DIR ${ROOT_DIR}/output/bin)
 SET(PROJECT_EXPORT_DIR ${ROOT_DIR}/output/exports)
-SET(GLAD_INCLUDES_DIR
-	${CMAKE_CURRENT_SOURCE_DIR}/extensions/glad
-	${CMAKE_CURRENT_SOURCE_DIR}/extensions/glad/src
-	${CMAKE_CURRENT_SOURCE_DIR}/extensions/glad/include)
+SET(EXTS_INCLUDES_DIR ${CMAKE_CURRENT_SOURCE_DIR}/output/includes)
 
 #GLOBAL FILES
 FILE(GLOB EXTS_INCLUDE_FILES
-${CMAKE_CURRENT_SOURCE_DIR}/output/include/glad/glad.h
-${CMAKE_CURRENT_SOURCE_DIR}/output/include/GLFW/glfw3.h
-${CMAKE_CURRENT_SOURCE_DIR}/output/include/GLFW/glfw3native.h
-${CMAKE_CURRENT_SOURCE_DIR}/output/include/tinyxml2/tinyxml2.h)
+${CMAKE_CURRENT_SOURCE_DIR}/output/includes/glad/glad.h
+${CMAKE_CURRENT_SOURCE_DIR}/output/includes/GLFW/glfw3.h
+${CMAKE_CURRENT_SOURCE_DIR}/output/includes/GLFW/glfw3native.h
+${CMAKE_CURRENT_SOURCE_DIR}/output/includes/tinyxml2/tinyxml2.h)
 
-macro(ANDROID_BUILD_MACRO)
+macro(OS_BUILD_MACRO)
 	SET(project_target	"${ARGN}")
 	set_target_properties(${project_target}
 	    PROPERTIES
@@ -46,7 +43,7 @@ macro(ANDROID_BUILD_MACRO)
 	    RUNTIME_OUTPUT_DIRECTORY
 	    "${PROJECT_BIN_DIR}/${CMAKE_BUILD_TYPE}/${ANDROID_PLATFORM}/${ANDROID_ABI}"
 	)
-endmacro(ANDROID_BUILD_MACRO)
+endmacro(OS_BUILD_MACRO)
 
 SET_PROPERTY(GLOBAL PROPERTY USE_FOLDERS ON)
 

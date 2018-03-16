@@ -8,7 +8,7 @@ SET(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 FILE(GLOB APP_INCLUDE_HEAD ${INCLUDE_DIR}/*.h)
 FILE(GLOB APP_HEAD ${SOURCE_DIR}/*.h)
 FILE(GLOB APP_SOURCE ${SOURCE_DIR}/*.cpp)
-	
+
 SET(ADEM_FILES ${APP_HEAD} ${APP_SOURCE})
 SET(ADEM_SOURCE_FILES ${APP_SOURCE})
 SET(ADEM_HEADER_FILES ${APP_HEAD})
@@ -26,13 +26,7 @@ target_link_libraries(adem_static tinyxml2_static exts)
 generate_export_header(adem_static EXPORT_FILE_NAME ${PROJECT_EXPORT_DIR}/adon_export.h)
 add_dependencies(adem_static tinyxml2_static)
 target_include_directories(adem_static PUBLIC ${PROJECT_EXPORT_DIR})
-
-set_target_properties(adem_static
-    PROPERTIES
-    ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_LIB_DIR}/${CMAKE_BUILD_TYPE}/${ANDROID_PLATFORM}/${ANDROID_ABI}"
-    LIBRARY_OUTPUT_DIRECTORY "${PROJECT_LIB_DIR}/${CMAKE_BUILD_TYPE}/${ANDROID_PLATFORM}/${ANDROID_ABI}"
-    RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BIN_DIR}/${CMAKE_BUILD_TYPE}/${ANDROID_PLATFORM}/${ANDROID_ABI}"
-)
+OS_BUILD_MACRO(adem_static)
 endif()
 
 if(BUILD_SHARED_LIBS)
@@ -41,12 +35,7 @@ target_link_libraries(adem tinyxml2 exts)
 generate_export_header(adem EXPORT_FILE_NAME ${PROJECT_EXPORT_DIR}/adon_export.h)
 add_dependencies(adem tinyxml2)
 target_include_directories(adem PUBLIC ${PROJECT_EXPORT_DIR})
-set_target_properties(adem
-	PROPERTIES
-	ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_LIB_DIR}/${CMAKE_BUILD_TYPE}/${ANDROID_PLATFORM}/${ANDROID_ABI}"
-	LIBRARY_OUTPUT_DIRECTORY "${PROJECT_LIB_DIR}/${CMAKE_BUILD_TYPE}/${ANDROID_PLATFORM}/${ANDROID_ABI}"
-	RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BIN_DIR}/${CMAKE_BUILD_TYPE}/${ANDROID_PLATFORM}/${ANDROID_ABI}"
-)
+OS_BUILD_MACRO(adem)
 
 endif()
 

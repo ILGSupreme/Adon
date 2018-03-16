@@ -1,4 +1,4 @@
-#include <AdWin.h>
+#include <adwin.h>
 
 int main(int argc, char **argv)
 {
