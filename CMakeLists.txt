@@ -27,14 +27,26 @@ SET(GLAD_INCLUDES_DIR
 	${CMAKE_CURRENT_SOURCE_DIR}/extensions/glad
 	${CMAKE_CURRENT_SOURCE_DIR}/extensions/glad/src
 	${CMAKE_CURRENT_SOURCE_DIR}/extensions/glad/include)
-	
+
 #GLOBAL FILES
-FILE(GLOB GLAD_FILES
-${CMAKE_CURRENT_SOURCE_DIR}/extensions/glad/src/glad.c 
-${CMAKE_CURRENT_SOURCE_DIR}/extensions/glad/include/glad/glad.h
-${CMAKE_CURRENT_SOURCE_DIR}/extensions/glad/include/KHR/khrplatform.h)
+FILE(GLOB EXTS_INCLUDE_FILES
+${CMAKE_CURRENT_SOURCE_DIR}/output/include/glad/glad.h
+${CMAKE_CURRENT_SOURCE_DIR}/output/include/GLFW/glfw3.h
+${CMAKE_CURRENT_SOURCE_DIR}/output/include/GLFW/glfw3native.h
+${CMAKE_CURRENT_SOURCE_DIR}/output/include/tinyxml2/tinyxml2.h)
 
-
+macro(ANDROID_BUILD_MACRO)
+	SET(project_target	"${ARGN}")
+	set_target_properties(${project_target}
+	    PROPERTIES
+	    ARCHIVE_OUTPUT_DIRECTORY
+	    "${PROJECT_LIB_DIR}/${CMAKE_BUILD_TYPE}/${ANDROID_PLATFORM}/${ANDROID_ABI}"
+	    LIBRARY_OUTPUT_DIRECTORY
+	    "${PROJECT_LIB_DIR}/${CMAKE_BUILD_TYPE}/${ANDROID_PLATFORM}/${ANDROID_ABI}"
+	    RUNTIME_OUTPUT_DIRECTORY
+	    "${PROJECT_BIN_DIR}/${CMAKE_BUILD_TYPE}/${ANDROID_PLATFORM}/${ANDROID_ABI}"
+	)
+endmacro(ANDROID_BUILD_MACRO)
 
 SET_PROPERTY(GLOBAL PROPERTY USE_FOLDERS ON)
 

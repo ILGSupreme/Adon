@@ -1,6 +1,6 @@
 #ifndef ADWIN_HEADER
 #define ADWIN_HEADER
-#include <AdWin_export.h>
+#include <adwin_export.h>
 
 namespace Adon
 {
