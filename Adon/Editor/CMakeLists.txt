@@ -1,0 +1,48 @@
+if(${CMAKE_SYSTEM_NAME} MATCHES "Windows" OR
+	${CMAKE_SYSTEM_NAME} MATCHES "Darwin" OR
+	${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+
+PROJECT(Editor) # Editor Window
+
+include(GenerateExportHeader)
+
+SET(INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
+SET(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
+
+FILE(GLOB APP_INCLUDE_HEAD ${INCLUDE_DIR}/*.h)
+FILE(GLOB APP_HEAD ${SOURCE_DIR}/*.h)
+FILE(GLOB APP_SOURCE ${SOURCE_DIR}/*.cpp)
+
+SET(EDITOR_FILES ${APP_HEAD} ${APP_SOURCE})
+SET(EDITOR_SOURCE_FILES ${APP_SOURCE})
+SET(EDITOR_HEADER_FILES ${APP_HEAD})
+SET(EDITOR_INCLUDE_FILES ${APP_INCLUDE_HEAD})
+
+include_directories(${SOURCE_DIR} ${OPENGL_LIBRARIES} ${EXTS_INCLUDES_DIR})
+
+#message("MESSAGE=${EXTS_INCLUDES_DIR}")
+
+SOURCE_GROUP("Source" FILES ${EDITOR_SOURCE_FILES})
+SOURCE_GROUP("Header" FILES ${EDITOR_HEADER_FILES})
+SOURCE_GROUP("Include" FILES ${EDITOR_INCLUDE_FILES})
+
+if(BUILD_SHARED_LIBS)
+add_library(editor SHARED ${EDITOR_FILES})
+target_link_libraries(editor glad glfw exts ${OPENGL_LIBRARIES})
+generate_export_header(editor EXPORT_FILE_NAME ${PROJECT_EXPORT_DIR}/editor_export.h)
+add_dependencies(editor glfw exts)
+target_include_directories(editor PUBLIC ${PROJECT_EXPORT_DIR} ${EXTS_INCLUDES_DIR})
+OS_BUILD_MACRO(editor)
+endif()
+
+add_subdirectory(test)
+
+if(BUILD_STATIC_LIBS)
+SET_TARGET_PROPERTIES(editor_static PROPERTIES FOLDER "Adon/Editor")
+endif()
+if(BUILD_SHARED_LIBS)
+SET_TARGET_PROPERTIES(editor PROPERTIES FOLDER "Adon/Editor")
+endif()
+
+SET_TARGET_PROPERTIES(editor_test PROPERTIES FOLDER "Adon/Editor/Test")
+endif()
