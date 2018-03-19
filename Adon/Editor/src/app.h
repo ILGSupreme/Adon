@@ -1,24 +1,24 @@
-#ifndef ADWIN_HEADER
-#define ADWIN_HEADER
-#include <adwin_export.h>
+#ifndef APP_HEADER
+#define APP_HEADER
+#include <editor_export.h>
 
 namespace Adon
 {
 	namespace Editor
 	{
-		class ADWIN_EXPORT App
+		class EDITOR_EXPORT App
 		{
 		public:
 			App();
 			~App();
-			ADWIN_EXPORT bool Open();
-			ADWIN_EXPORT void Close();
-			ADWIN_EXPORT void Run();
-			ADWIN_EXPORT void Exit();
+			EDITOR_EXPORT bool Open();
+			EDITOR_EXPORT void Close();
+			EDITOR_EXPORT void Run();
+			EDITOR_EXPORT void Exit();
 		private:
 			bool isOpen;
 		};
 	}
 }
 
-#endif // !ADWIN_HEADER
+#endif // !APP_HEADER

@@ -18,9 +18,9 @@ SET(EDITOR_SOURCE_FILES ${APP_SOURCE})
 SET(EDITOR_HEADER_FILES ${APP_HEAD})
 SET(EDITOR_INCLUDE_FILES ${APP_INCLUDE_HEAD})
 
-include_directories(${SOURCE_DIR} ${OPENGL_LIBRARIES} ${EXTS_INCLUDES_DIR})
+include_directories(${SOURCE_DIR} ${OPENGL_LIBRARIES} ${EXTS_INCLUDES_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/../)
 
-#message("MESSAGE=${EXTS_INCLUDES_DIR}")
+message("TEST = ${CMAKE_CURRENT_SOURCE_DIR}/../")
 
 SOURCE_GROUP("Source" FILES ${EDITOR_SOURCE_FILES})
 SOURCE_GROUP("Header" FILES ${EDITOR_HEADER_FILES})
@@ -33,6 +33,15 @@ generate_export_header(editor EXPORT_FILE_NAME ${PROJECT_EXPORT_DIR}/editor_expo
 add_dependencies(editor glfw exts)
 target_include_directories(editor PUBLIC ${PROJECT_EXPORT_DIR} ${EXTS_INCLUDES_DIR})
 OS_BUILD_MACRO(editor)
+endif()
+
+if(BUILD_STATIC_LIBS)
+add_library(editor_static ${EDITOR_FILES})
+target_link_libraries(editor_static glad glfw exts ${OPENGL_LIBRARIES})
+generate_export_header(editor_static EXPORT_FILE_NAME ${PROJECT_EXPORT_DIR}/editor_export.h)
+add_dependencies(editor_static glfw exts)
+target_include_directories(editor_static PUBLIC ${PROJECT_EXPORT_DIR} ${EXTS_INCLUDES_DIR})
+OS_BUILD_MACRO(editor_static)
 endif()
 
 add_subdirectory(test)
