@@ -11,10 +11,10 @@ namespace Adon
 		public:
 			App();
 			~App();
-			EDITOR_EXPORT bool Open();
-			EDITOR_EXPORT void Close();
-			EDITOR_EXPORT void Run();
-			EDITOR_EXPORT void Exit();
+			bool Open();
+			void Close();
+			void Run();
+			void Exit();
 		private:
 			bool isOpen;
 		};

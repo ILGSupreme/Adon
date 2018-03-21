@@ -1,13 +1,17 @@
-#include <app.h>
-
+#include <adonapp.h>
+#include <window.h>
+#include <cstdio>
+#include <typeinfo>
 //testing app
 
 int main(int argc, char **argv)
 {
-	Adon::Editor::App app;
+	fprintf(stderr, "%s\n", "google");
+	Adon::Editor::AdonApp app;
 	if(app.Open())
 	{
 			app.Run();
+			fprintf(stderr, "%s\n", "google");
 			app.Close();
 	}
 	app.Exit();

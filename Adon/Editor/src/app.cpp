@@ -10,7 +10,6 @@ namespace Adon
 		EDITOR_EXPORT App::App() :
 		isOpen(false)
 		{
-			// empty
 		}
 
 		EDITOR_EXPORT App::~App()
