@@ -79,7 +79,7 @@ Adon::Editor::Window::Update() {
 
 inline void
 Adon::Editor::Window::SwapBuffers() {
-  glfwSwapBuffers(this->window);
+	if(nullptr != this->window) glfwSwapBuffers(this->window);
 }
 
 
