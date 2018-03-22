@@ -1,10 +1,10 @@
 [submodule "extensions/tinyxml2"]
 	path = extensions/tinyxml2
-	url = git@github.com:leethomason/tinyxml2.git
+	url = https://github.com/leethomason/tinyxml2.git
 [submodule "extensions/glfw"]
 	path = extensions/glfw
-	url = git@github.com:glfw/glfw.git
+	url = https://github.com/glfw/glfw.git
 	branch = latest
 [submodule "extensions/glad"]
 	path = extensions/glad
-	url = git@github.com:Dav1dde/glad.git
+	url = https://github.com/Dav1dde/glad.git
