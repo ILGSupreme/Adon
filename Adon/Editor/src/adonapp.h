@@ -15,6 +15,7 @@ namespace Adon
       ~AdonApp();
       bool Open();
       void Close();
+      void Exit();
       void Run();
     private:
       Window* window;

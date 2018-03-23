@@ -49,16 +49,26 @@ namespace Adon
       int32 width;
       int32 height;
       std::string title;
-      GLFWwindow* window;
+      bool isOpen;
+
+      GLFWwindow* _glfwwindow;
     };
+
+    EDITOR_EXPORT void TerminateGLFW();
   }
+}
+
+inline void
+Adon::Editor::TerminateGLFW()
+{
+  glfwTerminate();
 }
 
 inline void
 Adon::Editor::Window::SetSize(int32 width,int32 height) {
   this->width = width;
   this->height = height;
-  if(nullptr != this->window) this->Resize();
+  if(nullptr != this->_glfwwindow) this->Resize();
 }
 
 
@@ -69,17 +79,17 @@ Adon::Editor::Window::SetTitle(std::string title) {
 
 inline bool
 Adon::Editor::Window::IsOpen() {
-  return NULL != this->window;
+  return this->isOpen;
 }
 
 inline void
 Adon::Editor::Window::Update() {
-  glfwPollEvents();
+  if(nullptr != this->_glfwwindow) glfwPollEvents();
 }
 
 inline void
 Adon::Editor::Window::SwapBuffers() {
-	if(nullptr != this->window) glfwSwapBuffers(this->window);
+	if(nullptr != this->_glfwwindow) glfwSwapBuffers(this->_glfwwindow);
 }
 
 
@@ -90,7 +100,7 @@ Adon::Editor::Window::SetKeyPressFunction(const std::function<void(int32, int32,
 
 inline bool
 Adon::Editor::Window::MakeCurrent() {
-  glfwMakeContextCurrent(window);
+  glfwMakeContextCurrent(this->_glfwwindow);
   if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)){
     //initializing GLAD produced an error.
     fprintf(stderr, "%s\n", "Could not initilize GLAD");
@@ -101,11 +111,11 @@ Adon::Editor::Window::MakeCurrent() {
 
 inline void
 Adon::Editor::Window::Resize() {
-  glfwSetWindowSize(window, width, height);
+  glfwSetWindowSize(this->_glfwwindow, width, height);
 }
 inline void
 Adon::Editor::Window::Retitle(){
-  if (nullptr != this->window) glfwSetWindowTitle(this->window, this->title.c_str());
+  if (nullptr != this->_glfwwindow) glfwSetWindowTitle(this->_glfwwindow, this->title.c_str());
 }
 
 #endif //WINDOW_HEADER

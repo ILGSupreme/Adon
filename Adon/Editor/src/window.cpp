@@ -10,7 +10,8 @@ namespace Adon
                     :
                     width(640),
                     height(480),
-                    title("Adon Default Screen")
+                    title("Adon Default Screen"),
+                    isOpen(false)
 
     {
       //empty code
@@ -23,7 +24,8 @@ namespace Adon
                     :
                     width(width),
                     height(height),
-                    title(title)
+                    title(title),
+                    isOpen(false)
 
     {
       //empty code
@@ -33,6 +35,8 @@ namespace Adon
     Window::~Window()
     {
       //empty code
+      glfwDestroyWindow(this->_glfwwindow);
+      this->_glfwwindow = nullptr;
     }
 
     EDITOR_EXPORT
@@ -52,10 +56,8 @@ namespace Adon
                                    int32 mods)
 
     {
-      fprintf(stderr, "%s\n", "HAHAHAHA");
       Window* window = (Window*) glfwGetWindowUserPointer(win);
       if (nullptr != window->keyPressCallback) {
-        fprintf(stderr, "%s\n", "HAHAHA");
         window->keyPressCallback(key,scancode,action,mods);
       }
     }
@@ -72,27 +74,25 @@ namespace Adon
       }
       glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR,  2);
       glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR,  0);
-      this->window = glfwCreateWindow(width,height,title.c_str(), NULL, NULL);
-      if (!window)
+      this->_glfwwindow = glfwCreateWindow(width,height,title.c_str(), NULL, NULL);
+      if (!_glfwwindow)
       {
         glfwTerminate();
         return false;
       }
-      glfwSetWindowUserPointer(this->window, this);
-      glfwSetKeyCallback(window, Adon::Editor::Window::StaticKeyPressCallBack);
+      glfwSetWindowUserPointer(this->_glfwwindow, this);
+      glfwSetKeyCallback(_glfwwindow, Adon::Editor::Window::StaticKeyPressCallBack);
       if(!MakeCurrent())
       {
         return false;
       }
-      return true;
+      this->isOpen = true;
+      return isOpen;
     }
 
     EDITOR_EXPORT
     void Window::Close() {
-      if(nullptr != window ) glfwDestroyWindow(this->window);
-      this->window = nullptr;
-      glfwTerminate();
-      fprintf(stderr, "%s\n", "TERMINATION COMPLETE");
+      this->isOpen = false;
     }
   } //namespace Editor
 } //namespace Adon

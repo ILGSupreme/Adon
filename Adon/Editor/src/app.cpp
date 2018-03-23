@@ -40,5 +40,10 @@ namespace Adon
 			// override in subclass
 		}
 
+		EDITOR_EXPORT bool App::IsOpen()
+		{
+			return this->isOpen;
+		}
+
 	}
 }

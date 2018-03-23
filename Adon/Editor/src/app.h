@@ -15,6 +15,7 @@ namespace Adon
 			void Close();
 			void Run();
 			void Exit();
+			bool IsOpen();
 		private:
 			bool isOpen;
 		};

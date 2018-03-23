@@ -10,7 +10,6 @@ namespace Adon
     }
     EDITOR_EXPORT AdonApp::~AdonApp()
     {
-      delete window;
     }
     EDITOR_EXPORT bool AdonApp::Open()
     {
@@ -18,7 +17,6 @@ namespace Adon
       this->window = new Adon::Editor::Window;
       window->SetKeyPressFunction([this](int32,int32,int32,int32)
       {
-        fprintf(stderr, "%s\n", "test");
         this->window->Close();
       });
       if(window->Open())
@@ -32,6 +30,12 @@ namespace Adon
     EDITOR_EXPORT void AdonApp::Close()
     {
       App::Close();
+      delete this->window;
+    }
+
+    EDITOR_EXPORT void AdonApp::Exit()
+    {
+      Adon::Editor::TerminateGLFW();
     }
 
     EDITOR_EXPORT void AdonApp::Run()
