@@ -21,13 +21,11 @@ target_link_libraries(editor_test editor)
 add_dependencies(editor_test editor)
 endif()
 
-set_target_properties(editor_test
-    PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BIN_DIR}/adon/adwin/tests/${CMAKE_BUILD_TYPE}"
-)
+OS_TEST_MACRO(editor_test)
 
 if(BUILD_SHARED_LIBS)
-add_custom_command(TARGET editor_test POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different "$<TARGET_FILE:editor>" $<TARGET_FILE_DIR:editor_test>)
-add_custom_command(TARGET editor_test POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different "$<TARGET_FILE:glfw>" $<TARGET_FILE_DIR:editor_test>)
+	add_custom_command(TARGET editor_test POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different "$<TARGET_FILE:editor>" $<TARGET_FILE_DIR:editor_test>)
+	add_custom_command(TARGET editor_test POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different "$<TARGET_FILE:glfw>" $<TARGET_FILE_DIR:editor_test>)
 endif()
+
 endif()

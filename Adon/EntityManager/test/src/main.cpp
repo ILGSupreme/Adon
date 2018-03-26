@@ -1,4 +1,4 @@
-#include <adem.h>
+#include <xmlreader.h>
 #include <iostream>
 #include <cstdio>
 
@@ -10,7 +10,7 @@ int main()
 	//std::cout << args[1]<< std::endl;
 	const char* filename = "xmltestfile.xml";
 	//memcpy(filename, args[1],sizeof(32));
-	int eerr = Adon::Adem::LoadObjectsFromFile(filename);
+	int eerr = Adon::EntityManager::XMLReader::LoadObjectsFromFile(filename);
 	printf("%d hej \n", eerr);
 	return 1;
 }

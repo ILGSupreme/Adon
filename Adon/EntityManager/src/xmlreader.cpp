@@ -1,30 +1,22 @@
-#include "adem.h"
+#include "xmlreader.h"
 #include <iostream>
 #include <tinyxml2.h>
 
 using namespace tinyxml2;
 
-int Adon::Adem::LoadObjectsFromFile(const char* filename)
+int Adon::EntityManager::XMLReader::LoadObjectsFromFile(const char* filename)
 {
 	XMLDocument xmlDoc;
 	XMLError err = xmlDoc.LoadFile(filename);
-
 	switch (err)
 	{
 	case tinyxml2::XML_SUCCESS:
-		//printf("SUCCESS \n");
 		break;
 	case tinyxml2::XML_NO_ATTRIBUTE:
-		//printf("NO ATTRIBUTES \n");
-		err = tinyxml2::XML_NO_ATTRIBUTE;
 		break;
 	case tinyxml2::XML_WRONG_ATTRIBUTE_TYPE:
-		//printf("WRONG ATTRIBUTE \n");
-		err = tinyxml2::XML_WRONG_ATTRIBUTE_TYPE;
 		break;
 	case tinyxml2::XML_ERROR_FILE_NOT_FOUND:
-		printf("FILE NOT FOUND \n");
-		err = tinyxml2::XML_ERROR_FILE_NOT_FOUND;
 		break;
 	case tinyxml2::XML_ERROR_FILE_COULD_NOT_BE_OPENED:
 		break;
@@ -63,6 +55,5 @@ int Adon::Adem::LoadObjectsFromFile(const char* filename)
 	default:
 		break;
 	}
-
 	return err;
 }
