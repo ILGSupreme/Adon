@@ -1,3 +1,3 @@
 PROJECT(Adon)
-add_subdirectory(EntityManager)
+add_subdirectory(EditorObjects)
 add_subdirectory(Editor)
