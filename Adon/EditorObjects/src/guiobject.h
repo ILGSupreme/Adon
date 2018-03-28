@@ -6,13 +6,17 @@
 
 namespace Adon
 {
-  namespace EntityManager
+  namespace EditorObjects
   {
     class EDITOR_OBJECTS_EXPORT GUIObject
     {
+    public:
       GUIObject();
+      GUIObject(const char*,const char*,const char*);
       ~GUIObject();
-      std::string id;
+      std::string gui_id;
+      std::string script_id;
+      std::string model_id;
       //Model
       //Script
     };

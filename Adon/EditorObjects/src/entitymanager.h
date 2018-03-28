@@ -5,7 +5,7 @@
 
 namespace Adon
 {
-  namespace EntityManager
+  namespace EditorObjects
   {
     EDITOR_OBJECTS_EXPORT void test(){return;}
   }

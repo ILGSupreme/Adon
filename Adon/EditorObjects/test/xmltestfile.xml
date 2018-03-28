@@ -2,18 +2,18 @@
 <GUIObjects>
 
   <GUIObject id="Button1">
-    <script script="button_script.cs"></script>
-    <model name="Button"></model>
+    <script id="button_script.cs"></script>
+    <model id="Circle Button"></model>
   </GUIObject>
 
   <GUIObject id="Button2">
-    <script script="button_script.cs"></script>
-    <model  name="Circle Button"></model>
+    <script id="button_script.cs"></script>
+    <model  id="Circle Button"></model>
   </GUIObject>
 
   <GUIObject id="Button3">
-    <script script="button_script.cs"></script>
-    <model name="Button"></model>
+    <script id="button_script.cs"></script>
+    <model id="Button"></model>
   </GUIObject>
 
 </GUIObjects>

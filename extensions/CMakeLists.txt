@@ -13,11 +13,13 @@ SET(GLFW_BUILD_DOCS OFF CACHE BOOL "turning off build docs" FORCE)
 SET(GLFW_VULKAN_STATIC OFF CACHE BOOL "vulkan static glfw off" FORCE)
 SET(GLFW_DOCUMENT_INTERNALS OFF CACHE BOOL "glfw documents off" FORCE)
 
-configure_file(${GLAD_INCLUDE_DIRS}/glad/glad.h
-${ROOT_DIR}/output/includes/glad/glad.h COPYONLY)
+add_custom_target(copy_glad_file ALL
+    COMMAND ${CMAKE_COMMAND} -E copy ${GLAD_INCLUDE_DIRS}/glad/glad.h ${ROOT_DIR}/output/includes/glad/glad.h)
+add_dependencies(copy_glad_file glad)
 
-configure_file(${GLAD_INCLUDE_DIRS}/KHR/khrplatform.h
-${ROOT_DIR}/output/includes/KHR/khrplatform.h COPYONLY)
+add_custom_target(copy_khr_file ALL
+COMMAND ${CMAKE_COMMAND} -E copy ${GLAD_INCLUDE_DIRS}/KHR/khrplatform.h ${ROOT_DIR}/output/includes/KHR/khrplatform.h)
+add_dependencies(copy_khr_file glad)
 
 configure_file(${ROOT_DIR}/extensions/tinyxml2/tinyxml2.h
 ${ROOT_DIR}/output/includes/tinyxml2/tinyxml2.h COPYONLY)

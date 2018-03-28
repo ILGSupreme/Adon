@@ -3,6 +3,8 @@
 
 #include <editor_objects_exports.h>
 #include <xmldata.h>
+#include <guiobject.h>
+#include <list>
 
 namespace Adon
 {
@@ -12,7 +14,8 @@ namespace Adon
 		{
 			namespace XMLStaticFuncs
 			{
-				EDITOR_OBJECTS_EXPORT tinyxml2::XMLError LoadObjectsFromFile (const char* filename, XMLData& data);
+				EDITOR_OBJECTS_EXPORT tinyxml2::XMLError LoadXMLFile (const char* filename, XMLData& data);
+				EDITOR_OBJECTS_EXPORT tinyxml2::XMLError LoadObjects(std::list<GUIObject>& objects,	const XMLData& data);
 			}
 		}
 	}
