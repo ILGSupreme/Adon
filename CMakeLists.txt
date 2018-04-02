@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.2)
 
-PROJECT(AdonEngine)
+PROJECT(Adon)
+
+SET(CMAKE_PREFIX_PATH ${CMAKE_CURRENT_SOURCE_DIR})
+SET(ADON_PROJECT_NAME ${PROJECT_NAME})
+Find_Package(macros)
 
 #Find OpenGL, different for each type of OS
 if(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
@@ -41,27 +45,6 @@ ${CMAKE_CURRENT_SOURCE_DIR}/output/includes/glad/glad.h
 ${CMAKE_CURRENT_SOURCE_DIR}/output/includes/GLFW/glfw3.h
 ${CMAKE_CURRENT_SOURCE_DIR}/output/includes/GLFW/glfw3native.h
 ${CMAKE_CURRENT_SOURCE_DIR}/output/includes/tinyxml2/tinyxml2.h)
-
-macro(OS_BUILD_MACRO)
-	SET(project_target	"${ARGN}")
-	set_target_properties(${project_target}
-	    PROPERTIES
-	    ARCHIVE_OUTPUT_DIRECTORY
-	    "${PROJECT_LIB_DIR}/${CMAKE_BUILD_TYPE}/${OS_PLATFORM}/${ANDROID_PLATFORM}/${ANDROID_ABI}"
-	    LIBRARY_OUTPUT_DIRECTORY
-	    "${PROJECT_LIB_DIR}/${CMAKE_BUILD_TYPE}/${OS_PLATFORM}/${ANDROID_PLATFORM}/${ANDROID_ABI}"
-	    RUNTIME_OUTPUT_DIRECTORY
-	    "${PROJECT_BIN_DIR}/${CMAKE_BUILD_TYPE}/${OS_PLATFORM}/${ANDROID_PLATFORM}/${ANDROID_ABI}"
-	)
-endmacro(OS_BUILD_MACRO)
-
-macro(OS_TEST_MACRO)
-	set(project_target 	${ARGN})
-	set_target_properties(${project_target}
-	    PROPERTIES
-	    RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BIN_DIR}/adon/${project_target}/${OS_PLATFORM}/${CMAKE_BUILD_TYPE}"
-	)
-endmacro(OS_TEST_MACRO)
 
 SET_PROPERTY(GLOBAL PROPERTY USE_FOLDERS ON)
 
