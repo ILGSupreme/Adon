@@ -6,6 +6,10 @@ SET(CMAKE_PREFIX_PATH ${CMAKE_CURRENT_SOURCE_DIR})
 SET(ADON_PROJECT_NAME ${PROJECT_NAME})
 Find_Package(macros)
 
+if(${CMAKE_BUILD_TYPE} MATCHES "Debug")
+	add_definitions(-DDebug)
+endif()
+
 #Find OpenGL, different for each type of OS
 if(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
 

@@ -17,8 +17,6 @@ namespace Adon
       std::string gui_id;
       std::string script_id;
       std::string model_id;
-      //Model
-      //Script
     };
   }
 }
