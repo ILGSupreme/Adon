@@ -19,7 +19,6 @@ namespace Adon
       void Run();
     private:
       Window* window;
-      Entity entity;
     };
   }
 }
