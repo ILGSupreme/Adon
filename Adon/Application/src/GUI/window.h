@@ -1,7 +1,6 @@
 #ifndef WINDOW_HEADER
 #define WINDOW_HEADER
 
-#include <editor_export.h>
 #include <functional>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -11,7 +10,7 @@ namespace Adon
 {
   namespace Editor
   {
-    class EDITOR_EXPORT Window
+    class Window
     {
     public:
       Window();
@@ -54,7 +53,7 @@ namespace Adon
       GLFWwindow* _glfwwindow;
     };
 
-    EDITOR_EXPORT void TerminateGLFW();
+    void TerminateGLFW();
   }
 }
 

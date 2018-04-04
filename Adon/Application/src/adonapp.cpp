@@ -5,13 +5,13 @@ namespace Adon
 {
   namespace Editor
   {
-    EDITOR_EXPORT AdonApp::AdonApp()
+     AdonApp::AdonApp()
     {
     }
-    EDITOR_EXPORT AdonApp::~AdonApp()
+     AdonApp::~AdonApp()
     {
     }
-    EDITOR_EXPORT bool AdonApp::Open()
+     bool AdonApp::Open()
     {
       App::Open();
       this->window = new Adon::Editor::Window;
@@ -27,18 +27,18 @@ namespace Adon
       return false;
     }
 
-    EDITOR_EXPORT void AdonApp::Close()
+     void AdonApp::Close()
     {
       App::Close();
       delete this->window;
     }
 
-    EDITOR_EXPORT void AdonApp::Exit()
+     void AdonApp::Exit()
     {
       Adon::Editor::TerminateGLFW();
     }
 
-    EDITOR_EXPORT void AdonApp::Run()
+     void AdonApp::Run()
     {
       while(this->window->IsOpen())
       {

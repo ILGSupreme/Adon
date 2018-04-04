@@ -7,40 +7,40 @@ namespace Adon
 	namespace Editor
 	{
 
-		EDITOR_EXPORT App::App() :
+		 App::App() :
 		isOpen(false)
 		{
 		}
 
-		EDITOR_EXPORT App::~App()
+		 App::~App()
 		{
 			// empty
 		}
 
-		EDITOR_EXPORT bool App::Open()
+		 bool App::Open()
 		{
 			assert(!this->isOpen);
 			this->isOpen = true;
 			return isOpen;
 		}
 
-		EDITOR_EXPORT void App::Close()
+		 void App::Close()
 		{
 			assert(this->isOpen);
 			this->isOpen = false;
 		}
 
-		EDITOR_EXPORT void App::Run()
+		 void App::Run()
 		{
 			// override in subclass
 		}
 
-		EDITOR_EXPORT void App::Exit()
+		 void App::Exit()
 		{
 			// override in subclass
 		}
 
-		EDITOR_EXPORT bool App::IsOpen()
+		 bool App::IsOpen()
 		{
 			return this->isOpen;
 		}

@@ -2,6 +2,7 @@ project(Editor_Objects_Tests)
 
 SET(TESTFILES_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 SET(XML_TESTFILES_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+SET(EXCEPTION_FILE ${EXTS_INCLUDES_DIR}/exception/exception.h)
 
 FILE(GLOB TEST_FILES ${TESTFILES_SOURCE_DIR}/*.cpp)
 FILE(GLOB XML_FILES ${XML_TESTFILES_DIR}/*.xml)
@@ -9,7 +10,9 @@ FILE(GLOB XML_FILES ${XML_TESTFILES_DIR}/*.xml)
 SOURCE_GROUP("Source" FILES ${TEST_FILES})
 SOURCE_GROUP("XML" FILES ${XML_FILES})
 
-add_executable(editor_objects_test ${TEST_FILES} ${XML_FILES})
+include_directories(${EXTS_INCLUDES_DIR})
+
+add_executable(editor_objects_test ${TEST_FILES} ${XML_FILES} ${EXCEPTION_FILE})
 
 if(BUILD_STATIC_LIBS)
 target_link_libraries(editor_objects_test editor_objects_static)

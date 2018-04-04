@@ -5,33 +5,17 @@ namespace Adon
 {
   namespace Editor
   {
-    EDITOR_EXPORT
-    Window::Window()
-                    :
-                    width(640),
-                    height(480),
-                    title("Adon Default Screen"),
-                    isOpen(false)
 
+    Window::Window():width(640),height(480),title("Adon Default Screen"),isOpen(false)
     {
       //empty code
     }
 
-    EDITOR_EXPORT
-    Window::Window (int32 width,
-                    int32 height,
-                    std::string title)
-                    :
-                    width(width),
-                    height(height),
-                    title(title),
-                    isOpen(false)
-
+    Window::Window (int32 width,int32 height,std::string title):width(width),height(height),title(title),isOpen(false)
     {
       //empty code
     }
 
-    EDITOR_EXPORT
     Window::~Window()
     {
       //empty code
@@ -39,30 +23,21 @@ namespace Adon
       this->_glfwwindow = nullptr;
     }
 
-    EDITOR_EXPORT
-    void Window::StaticErrorCallBack(
-                                int error,
-                                const char* description)
-
+    void Window::StaticErrorCallBack(int error,const char* description)
     {
       fprintf(stderr, "Error %s\n", description);
     }
 
-    EDITOR_EXPORT
-    void Window::StaticKeyPressCallBack(GLFWwindow* win,
-                                   int32 key,
-                                   int32 scancode,
-                                   int32 action,
-                                   int32 mods)
-
+    void Window::StaticKeyPressCallBack(GLFWwindow* win,int32 key,int32 scancode,int32 action,int32 mods)
     {
       Window* window = (Window*) glfwGetWindowUserPointer(win);
-      if (nullptr != window->keyPressCallback) {
+      if (nullptr != window->keyPressCallback)
+      {
         window->keyPressCallback(key,scancode,action,mods);
       }
     }
 
-    EDITOR_EXPORT
+
     bool Window::Open()
     {
       glfwSetErrorCallback(StaticErrorCallBack);
@@ -90,7 +65,7 @@ namespace Adon
       return isOpen;
     }
 
-    EDITOR_EXPORT
+
     void Window::Close() {
       this->isOpen = false;
     }

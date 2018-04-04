@@ -1,12 +1,11 @@
 #ifndef APP_HEADER
 #define APP_HEADER
-#include <editor_export.h>
 
 namespace Adon
 {
 	namespace Editor
 	{
-		class EDITOR_EXPORT App
+		class App
 		{
 		public:
 			App();

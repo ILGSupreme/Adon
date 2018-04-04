@@ -5,7 +5,6 @@
 #include <string>
 
 #ifndef _WIN32
-
 //SINGED INTEGERS
 #if defined __INT8_TYPE__
 typedef int8_t              int8;
