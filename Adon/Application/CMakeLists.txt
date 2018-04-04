@@ -32,7 +32,7 @@ target_link_libraries(adon glad glfw exts ${OPENGL_LIBRARIES} editor_objects)
 add_dependencies(adon glfw exts editor_objects)
 endif()
 
-target_include_directories(adon PUBLIC ${EXTS_INCLUDES_DIR})
+target_include_directories(adon PUBLIC ${EXTS_INCLUDES_DIR} ${PROJECT_EXPORT_DIR})
 OS_TEST_MACRO(adon)
 
 if(BUILD_SHARED_LIBS)

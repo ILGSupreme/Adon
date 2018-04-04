@@ -15,7 +15,7 @@ macro(OS_TEST_MACRO)
 	set(project_target 	${ARGN})
 	set_target_properties(${project_target}
 	    PROPERTIES
-	    RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BIN_DIR}/TEST/${PROJECT_NAME}/${OS_PLATFORM}/${CMAKE_BUILD_TYPE}"
+	    RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BIN_DIR}/test/${PROJECT_NAME}/${OS_PLATFORM}/${CMAKE_BUILD_TYPE}"
 	)
 endmacro(OS_TEST_MACRO)
 

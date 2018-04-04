@@ -6,7 +6,7 @@
 
 int main(int argc, char **argv)
 {
-	Adon::Editor::AdonApp app;
+	Adon::Application::AdonApp app;
 	if(app.Open())
 	{
 			app.Run();

@@ -3,7 +3,7 @@
 
 namespace Adon
 {
-	namespace Editor
+	namespace Application
 	{
 		class App
 		{

@@ -26,7 +26,12 @@ target_link_libraries(editor_objects_static tinyxml2_static exts)
 generate_export_header(editor_objects_static EXPORT_FILE_NAME ${PROJECT_EXPORT_DIR}/editor_objects_exports.h)
 add_dependencies(editor_objects_static tinyxml2_static)
 target_include_directories(editor_objects_static PUBLIC ${PROJECT_EXPORT_DIR})
+
 OS_BUILD_MACRO(editor_objects_static)
+
+file(MAKE_DIRECTORY ${EXTS_INCLUDES_DIR}/editorobjects)
+add_custom_target(copy_files ALL COMMAND ${CMAKE_COMMAND} -E copy ${APP_HEAD} ${EXTS_INCLUDES_DIR}/editorobjects)
+add_dependencies(copy_files editor_objects_static)
 endif()
 
 if(BUILD_SHARED_LIBS)
@@ -35,8 +40,14 @@ target_link_libraries(editor_objects tinyxml2 exts)
 generate_export_header(editor_objects EXPORT_FILE_NAME ${PROJECT_EXPORT_DIR}/editor_objects_exports.h)
 add_dependencies(editor_objects tinyxml2)
 target_include_directories(editor_objects PUBLIC ${PROJECT_EXPORT_DIR})
+
 OS_BUILD_MACRO(editor_objects)
+
+file(MAKE_DIRECTORY ${EXTS_INCLUDES_DIR}/editorobjects)
+add_custom_target(copy_files ALL COMMAND ${CMAKE_COMMAND} -E copy ${APP_HEAD} ${EXTS_INCLUDES_DIR}/editorobjects)
+add_dependencies(copy_files editor_objects)
 endif()
+
 
 add_subdirectory(test)
 

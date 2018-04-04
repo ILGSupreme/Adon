@@ -2,12 +2,13 @@
 #define ADONAPP_HEADER
 #include <app.h>
 #include <window.h>
+#include <entity.h>
 
 namespace Adon
 {
-  namespace Editor
+  namespace Application
   {
-    class AdonApp : public Adon::Editor::App
+    class AdonApp : public Adon::Application::App
     {
     public:
       AdonApp();
@@ -18,6 +19,7 @@ namespace Adon
       void Run();
     private:
       Window* window;
+      Entity entity;
     };
   }
 }

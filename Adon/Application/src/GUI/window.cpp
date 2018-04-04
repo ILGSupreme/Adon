@@ -3,7 +3,7 @@
 
 namespace Adon
 {
-  namespace Editor
+  namespace Application
   {
 
     Window::Window():width(640),height(480),title("Adon Default Screen"),isOpen(false)
@@ -56,7 +56,7 @@ namespace Adon
         return false;
       }
       glfwSetWindowUserPointer(this->_glfwwindow, this);
-      glfwSetKeyCallback(_glfwwindow, Adon::Editor::Window::StaticKeyPressCallBack);
+      glfwSetKeyCallback(_glfwwindow, Adon::Application::Window::StaticKeyPressCallBack);
       if(!MakeCurrent())
       {
         return false;
@@ -69,5 +69,5 @@ namespace Adon
     void Window::Close() {
       this->isOpen = false;
     }
-  } //namespace Editor
+  } //namespace Application
 } //namespace Adon

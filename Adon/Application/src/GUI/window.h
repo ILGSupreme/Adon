@@ -8,7 +8,7 @@
 
 namespace Adon
 {
-  namespace Editor
+  namespace Application
   {
     class Window
     {
@@ -58,13 +58,13 @@ namespace Adon
 }
 
 inline void
-Adon::Editor::TerminateGLFW()
+Adon::Application::TerminateGLFW()
 {
   glfwTerminate();
 }
 
 inline void
-Adon::Editor::Window::SetSize(int32 width,int32 height) {
+Adon::Application::Window::SetSize(int32 width,int32 height) {
   this->width = width;
   this->height = height;
   if(nullptr != this->_glfwwindow) this->Resize();
@@ -72,33 +72,33 @@ Adon::Editor::Window::SetSize(int32 width,int32 height) {
 
 
 inline void
-Adon::Editor::Window::SetTitle(std::string title) {
+Adon::Application::Window::SetTitle(std::string title) {
   this->title = title;
 }
 
 inline bool
-Adon::Editor::Window::IsOpen() {
+Adon::Application::Window::IsOpen() {
   return this->isOpen;
 }
 
 inline void
-Adon::Editor::Window::Update() {
+Adon::Application::Window::Update() {
   if(nullptr != this->_glfwwindow) glfwPollEvents();
 }
 
 inline void
-Adon::Editor::Window::SwapBuffers() {
+Adon::Application::Window::SwapBuffers() {
 	if(nullptr != this->_glfwwindow) glfwSwapBuffers(this->_glfwwindow);
 }
 
 
 inline void
-Adon::Editor::Window::SetKeyPressFunction(const std::function<void(int32, int32,  int32,  int32)>& func) {
+Adon::Application::Window::SetKeyPressFunction(const std::function<void(int32, int32,  int32,  int32)>& func) {
   this->keyPressCallback = func;
 }
 
 inline bool
-Adon::Editor::Window::MakeCurrent() {
+Adon::Application::Window::MakeCurrent() {
   glfwMakeContextCurrent(this->_glfwwindow);
   if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)){
     //initializing GLAD produced an error.
@@ -109,11 +109,11 @@ Adon::Editor::Window::MakeCurrent() {
 }
 
 inline void
-Adon::Editor::Window::Resize() {
+Adon::Application::Window::Resize() {
   glfwSetWindowSize(this->_glfwwindow, width, height);
 }
 inline void
-Adon::Editor::Window::Retitle(){
+Adon::Application::Window::Retitle(){
   if (nullptr != this->_glfwwindow) glfwSetWindowTitle(this->_glfwwindow, this->title.c_str());
 }
 

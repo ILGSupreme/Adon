@@ -1,9 +1,9 @@
 #include "adonapp.h"
-
+#include <string>
 
 namespace Adon
 {
-  namespace Editor
+  namespace Application
   {
      AdonApp::AdonApp()
     {
@@ -14,7 +14,7 @@ namespace Adon
      bool AdonApp::Open()
     {
       App::Open();
-      this->window = new Adon::Editor::Window;
+      this->window = new Adon::Application::Window;
       window->SetKeyPressFunction([this](int32,int32,int32,int32)
       {
         this->window->Close();
@@ -35,7 +35,7 @@ namespace Adon
 
      void AdonApp::Exit()
     {
-      Adon::Editor::TerminateGLFW();
+      Adon::Application::TerminateGLFW();
     }
 
      void AdonApp::Run()
