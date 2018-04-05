@@ -1,8 +1,11 @@
 ADD_LIBRARY(exts INTERFACE)
 
 ADD_SUBDIRECTORY(tinyxml2)
-ADD_SUBDIRECTORY(glfw)
-ADD_SUBDIRECTORY(glad)
+if(${CMAKE_SYSTEM_NAME} MATCHES "Android")
+else(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+  ADD_SUBDIRECTORY(glfw)
+  ADD_SUBDIRECTORY(glad)
+endif()
 
 #SET TESTS OFF
 SET(BUILD_TESTING OFF CACHE BOOL "turning off tests" FORCE)
@@ -13,13 +16,17 @@ SET(GLFW_BUILD_DOCS OFF CACHE BOOL "turning off build docs" FORCE)
 SET(GLFW_VULKAN_STATIC OFF CACHE BOOL "vulkan static glfw off" FORCE)
 SET(GLFW_DOCUMENT_INTERNALS OFF CACHE BOOL "glfw documents off" FORCE)
 
+if(NOT ${CMAKE_SYSTEM_NAME} MATCHES "Android")
 add_custom_target(copy_glad_file ALL
     COMMAND ${CMAKE_COMMAND} -E copy ${GLAD_INCLUDE_DIRS}/glad/glad.h ${ROOT_DIR}/output/includes/glad/glad.h)
 add_dependencies(copy_glad_file glad)
+endif()
 
+if(NOT ${CMAKE_SYSTEM_NAME} MATCHES "Android")
 add_custom_target(copy_khr_file ALL
 COMMAND ${CMAKE_COMMAND} -E copy ${GLAD_INCLUDE_DIRS}/KHR/khrplatform.h ${ROOT_DIR}/output/includes/KHR/khrplatform.h)
 add_dependencies(copy_khr_file glad)
+endif()
 
 configure_file(${ROOT_DIR}/extensions/tinyxml2/tinyxml2.h
 ${ROOT_DIR}/output/includes/tinyxml2/tinyxml2.h COPYONLY)
@@ -39,9 +46,14 @@ SET_TARGET_PROPERTIES(tinyxml2 PROPERTIES FOLDER "extensions/tinyxml2_shared")
 OS_BUILD_MACRO(tinyxml2)
 endif()
 
+if(NOT ${CMAKE_SYSTEM_NAME} MATCHES "Android")
 SET_TARGET_PROPERTIES(glfw PROPERTIES FOLDER "extensions/glfw")
 OS_BUILD_MACRO(glfw)
 SET_TARGET_PROPERTIES(glad PROPERTIES FOLDER "extensions/glad")
 OS_BUILD_MACRO(glad)
-
+endif()
+if(NOT ${CMAKE_SYSTEM_NAME} MATCHES "Android")
 TARGET_INCLUDE_DIRECTORIES(exts INTERFACE tinyxml2 glfw glad glad/include glad/src)
+else()
+TARGET_INCLUDE_DIRECTORIES(exts INTERFACE tinyxml2)
+endif()

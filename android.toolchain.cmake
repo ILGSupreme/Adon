@@ -52,6 +52,8 @@ if(ANDROID_NDK_TOOLCHAIN_INCLUDED)
 endif(ANDROID_NDK_TOOLCHAIN_INCLUDED)
 set(ANDROID_NDK_TOOLCHAIN_INCLUDED true)
 
+#MESSAGE(STATUS "TESTING=${ANDROID_NDK}")
+
 # Android NDK
 if(NOT ANDROID_NDK)
   get_filename_component(ANDROID_NDK "${CMAKE_CURRENT_LIST_DIR}/../.." ABSOLUTE)
@@ -64,9 +66,19 @@ else()
 endif()
 file(TO_CMAKE_PATH "${ANDROID_NDK}" ANDROID_NDK)
 
+#this is a fix. when invoked twice, the ANDROID_NDK is empty for some reason...
 if(${ANDROID_NDK})
 else()
-SET(ANDROID_NDK "C:/Users/Samuel/android-ndk-r16b-windows-x86_64/android-ndk-r16b")
+  get_filename_component(PROJECT_DIR "${CMAKE_CURRENT_LIST_DIR}" ABSOLUTE)
+  file(STRINGS "${PROJECT_DIR}/config.cfg" CONFIG_PROPERTIES)
+  set(NDK_PATH "")
+  FOREACH(item ${CONFIG_PROPERTIES})
+    if(${item} MATCHES "ANDROID_NDK_PATH")
+      string(SUBSTRING ${item} 17 -1 NDK_PATH)
+      message(STATUS "TEST=${NDK_PATH}")
+    endif()
+  ENDFOREACH(item)
+  file(TO_CMAKE_PATH "${NDK_PATH}" ANDROID_NDK)
 endif()
 
 # Android NDK revision
