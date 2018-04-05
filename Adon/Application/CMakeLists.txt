@@ -38,6 +38,8 @@ OS_TEST_MACRO(adon)
 if(BUILD_SHARED_LIBS)
 	add_custom_command(TARGET adon POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different "$<TARGET_FILE:editor_objects>" $<TARGET_FILE_DIR:adon>)
 	add_custom_command(TARGET adon POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different "$<TARGET_FILE:glfw>" $<TARGET_FILE_DIR:adon>)
+	add_custom_command(TARGET adon POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different "$<TARGET_FILE:glad>" $<TARGET_FILE_DIR:adon>)
+	add_custom_command(TARGET adon POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different "$<TARGET_FILE:tinyxml2>" $<TARGET_FILE_DIR:adon>)
 endif()
 
 SET_TARGET_PROPERTIES(adon PROPERTIES FOLDER "Adon/Application")
