@@ -1,13 +1,13 @@
 #ifndef ENTITY_HEADER
 #define ENTITY_HEADER
 
-#include <editorobjects/guiobject.h>
+#include <adonobjects/xmlobject.h>
 
 namespace Adon
 {
   namespace Application
   {
-    class Entity : public EditorObjects::GUIObject
+    class Entity : public AdonObjects::XML::Classes::XMLObject
     {
     public:
       Entity();

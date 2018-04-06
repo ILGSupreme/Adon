@@ -1,10 +1,10 @@
 #include <entity.h>
 
-using namespace Adon::EditorObjects;
+using namespace Adon::AdonObjects;
 
 Adon::Application::Entity::Entity()
 {
-  GUIObject();
+  XMLObject();
 }
 
 Adon::Application::Entity::~Entity()

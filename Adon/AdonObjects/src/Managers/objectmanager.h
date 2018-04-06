@@ -5,9 +5,13 @@
 
 namespace Adon
 {
-  namespace EditorObjects
+  namespace AdonObjects
   {
-    EDITOR_OBJECTS_EXPORT void test(){return;}
+    class EDITOR_OBJECTS_EXPORT ObjectManager
+    {
+    private:
+    public:
+    };
   }
 }
 
