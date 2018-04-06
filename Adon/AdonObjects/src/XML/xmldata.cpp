@@ -7,6 +7,10 @@ ADONOBJECTS_EXPORT XML::Classes::XMLData::XMLData()
   //empty
 }
 
+ADONOBJECTS_EXPORT XML::Classes::XMLData::XMLData(const XMLData& data)
+{
+}
+
 ADONOBJECTS_EXPORT XML::Classes::XMLData::~XMLData()
 {
 	//empty

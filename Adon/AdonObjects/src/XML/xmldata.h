@@ -17,6 +17,7 @@ namespace Adon
         {
         public:
           XMLData();
+          XMLData(const XMLData&);
           ~XMLData();
           tinyxml2::XMLError LoadFile(std::string filename);
           const tinyxml2::XMLDocument& XMLDocument() const;

@@ -1,16 +1,30 @@
 #ifndef ENTITY_MANAGER_HEADER
 #define ENTITY_MANAGER_HEADER
 
-#include <editor_objects_exports.h>
+#include <adonobjects_exports.h>
+#include <vector>
+#include <string>
+#include <utility>
+#include <map>
+#include <xmldata.h>
+#include <xmlobject.h>
+#include <xml.h>
+
+using namespace Adon::AdonObjects::XML;
 
 namespace Adon
 {
   namespace AdonObjects
   {
-    class EDITOR_OBJECTS_EXPORT ObjectManager
+    class ADONOBJECTS_EXPORT ObjectManager
     {
-    private:
     public:
+      void LoadXMLFiles(const std::vector<std::string>& files);
+    private:
+      std::map<int,std::vector<Classes::XMLObject>> data;
+      std::vector<std::pair<int,Classes::XMLData>> xmldata_vector;
+      //needs to change
+      int instanceId = 0;
     };
   }
 }
