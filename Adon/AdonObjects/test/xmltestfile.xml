@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GUIObjects>
+<Containers>
 
-  <GUIObject id="Button1">
+  <Container id="Button1">
     <script id="button_script.cs"></script>
     <model id="Circle Button"></model>
-  </GUIObject>
+  </Container>
 
-  <GUIObject id="Button2">
+  <Container id="Button2">
     <script id="button_script.cs"></script>
     <model  id="Circle Button"></model>
-  </GUIObject>
+  </Container>
 
-  <GUIObject id="Button3">
+  <Container id="Button3">
     <script id="button_script.cs"></script>
     <model id="Button"></model>
-  </GUIObject>
+  </Container>
 
-</GUIObjects>
+</Containers>

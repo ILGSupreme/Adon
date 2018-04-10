@@ -1,10 +1,13 @@
-#ifndef XML_READER_HEADER
-#define XML_READER_HEADER
+#ifndef XML_HEADER
+#define XML_HEADER
 
 #include <adonobjects_exports.h>
-#include <xmldata.h>
-#include <xmlobject.h>
 #include <list>
+#include <vector>
+#include <string>
+#include <memory>
+#include "xmlbase.h"
+#include "xmlobject.h"
 
 namespace Adon
 {
@@ -12,10 +15,18 @@ namespace Adon
 	{
 		namespace XML
 		{
-				ADONOBJECTS_EXPORT tinyxml2::XMLError LoadXMLFile (const char* filename, Classes::XMLData& data);
-				ADONOBJECTS_EXPORT tinyxml2::XMLError LoadObjects(std::list<Classes::XMLObject>& objects,	const Classes::XMLData& data);
+			class Data
+			{
+			public:
+				Data(){}
+				Data(const Data& dat){}
+				XMLDocument xmldoc;
+				int32 id;
+			};
+				//ADONOBJECTS_EXPORT tinyxml2::XMLError LoadXMLFile (std::string filename, std::shared_ptr<Classes::XMLData>& data);
+				//ADONOBJECTS_EXPORT tinyxml2::XMLError LoadObjectsV(std::vector<Classes::XMLObject>& objects,	const Classes::XMLData& data);
 		}
 	}
 }
 
-#endif //XML_READER_HEADER
+#endif //XML_HEADER
