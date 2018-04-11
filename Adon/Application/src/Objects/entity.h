@@ -1,16 +1,18 @@
 #ifndef ENTITY_HEADER
 #define ENTITY_HEADER
 
-#include <adonobjects/xmlobject.h>
+#include <adonobjects/container.h>
 
 namespace Adon
 {
   namespace Application
   {
-    class Entity : public AdonObjects::XML::Classes::XMLObject
+    class Entity : public AdonObjects::XML::Classes::Container
     {
     public:
-      Entity();
+      Entity(const std::string objectID,int32 documentID,
+        const XMLAttribute*& contattr,const XMLAttribute*& scriptattr,
+        const XMLAttribute*& modelattr);
       ~Entity();
     private:
     };

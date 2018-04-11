@@ -18,9 +18,10 @@ namespace Adon
         class ADONOBJECTS_EXPORT  Container : private XML::Classes::XMLObject
         {
         public:
+          Container(){}
           Container(const std::string objectID,int32 documentID,
-            XMLAttribute* contattr,XMLAttribute* scriptattr,
-            XMLAttribute* modelattr);
+            const XMLAttribute*& contattr,const XMLAttribute*& scriptattr,
+            const XMLAttribute*& modelattr);
 
           void ChangeContainerValue(std::string value);
           void ChangeScriptValue(std::string value);
@@ -31,9 +32,9 @@ namespace Adon
           std::string GetModelValue();
 
         private:
-          XMLAttribute* cont_attr_id;
-          XMLAttribute* script_attr_id;
-          XMLAttribute* model_attr_id;
+          const XMLAttribute* cont_attr_id;
+          const XMLAttribute* script_attr_id;
+          const XMLAttribute* model_attr_id;
         };
       }
     }

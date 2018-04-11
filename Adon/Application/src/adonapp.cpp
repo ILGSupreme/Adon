@@ -14,6 +14,7 @@ namespace Adon
      bool AdonApp::Open()
     {
       App::Open();
+      entitymanager.Init();
       this->window = new Adon::Application::Window;
       window->SetKeyPressFunction([this](int32,int32,int32,int32)
       {

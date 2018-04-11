@@ -3,6 +3,7 @@
 #include <app.h>
 #include <window.h>
 #include <entity.h>
+#include "entitymanager.h"
 
 namespace Adon
 {
@@ -19,6 +20,7 @@ namespace Adon
       void Run();
     private:
       Window* window;
+      EntityManager entitymanager;
     };
   }
 }

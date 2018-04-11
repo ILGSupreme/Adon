@@ -20,8 +20,8 @@ namespace Adon
         class ADONOBJECTS_EXPORT XMLObject : public XMLBase
         {
         protected:
-          void ChangeAttrValueInt(XMLAttribute* attr, int32 value) {attr->SetAttribute(value);}
-          void ChangeAttrValueString(XMLAttribute* attr, std::string value) {attr->SetAttribute(value.c_str());}
+          void ChangeAttrValueInt(const XMLAttribute*& attr, int32 value) const;
+          void ChangeAttrValueString(const XMLAttribute*& attr, std::string value) const;
 
           std::string GetObjectID() {return object_id;}
           void        SetObjectID(std::string object_id) {this->object_id = object_id;}
