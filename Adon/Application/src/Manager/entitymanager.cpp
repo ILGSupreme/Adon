@@ -4,6 +4,15 @@
 using namespace Adon::Application;
 using namespace tinyxml2;
 
+EntityManager::EntityManager()
+{
+}
+
+EntityManager::~EntityManager()
+{
+  //empty code
+}
+
 void EntityManager::Init()
 {
   ParseFile("xmltestfile.xml");

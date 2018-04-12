@@ -23,8 +23,6 @@ namespace Adon
 				XMLDocument xmldoc;
 				int32 id;
 			};
-				//ADONOBJECTS_EXPORT tinyxml2::XMLError LoadXMLFile (std::string filename, std::shared_ptr<Classes::XMLData>& data);
-				//ADONOBJECTS_EXPORT tinyxml2::XMLError LoadObjectsV(std::vector<Classes::XMLObject>& objects,	const Classes::XMLData& data);
 		}
 	}
 }

@@ -2,7 +2,6 @@
 #define CONFIG_HEADER
 
 #include <cstdint>
-#include <string>
 
 #ifndef _WIN32
 //SINGED INTEGERS
@@ -70,6 +69,8 @@ typedef uint_fast64_t         uint64;
 #elif defined __UINT_LEAST64_TYPE__
 typedef uint_least64_t        uint64;
 #endif
+
+
 #else
 
 typedef int8_t								int8;
@@ -78,5 +79,6 @@ typedef int32_t								int32;
 typedef int64_t								int64;
 
 #endif //NOT WIN32
+
 
 #endif //CONFIG_HEADER
