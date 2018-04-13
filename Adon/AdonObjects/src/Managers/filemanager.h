@@ -21,13 +21,11 @@ namespace Adon
       public:
         Filemanager();
         void Init();
-        void Update();
-        void GetFolders(const std::string path);
-        void GetFiles(const std::string path);
+        void LoadFolders(const std::string path);
+        void GetAllFilesOfType(std::vector<File>&,Filetype);
       protected:
         std::string filepath;
         std::vector<Directory> directories;
-        std::vector<File> files;
       };
     }
   }

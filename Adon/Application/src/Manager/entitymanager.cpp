@@ -15,7 +15,24 @@ EntityManager::~EntityManager()
 
 void EntityManager::Init()
 {
-  ParseFile("xmltestfile.xml");
+  std::vector<File> xmlfiles;
+  Adon::AdonObjects::Managers::Filemanager::Init();
+  Adon::AdonObjects::Managers::Filemanager::GetAllFilesOfType(xmlfiles,Filetype::XML);
+
+  fprintf(stderr, "%lu\n", xmlfiles.size());
+  for(auto& file : xmlfiles)
+  {
+      fprintf(stderr, "%s\n", file.GetFullPath().c_str());
+      if(ParseFile(file.GetFullPath())!=XML_SUCCESS)
+      {
+        fprintf(stderr, "Cant parse file: %s\n", file.GetName().c_str());
+      }
+      else
+      {
+        fprintf(stderr, "%s\n", "Parsed XML FILE");
+      }
+  }
+
   ParseAllDocs();
 }
 

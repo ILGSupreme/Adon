@@ -17,5 +17,6 @@ int main()
 	manager.ParseFile("xmltestfile.xml");
 	manager.ParseDoc(manager.documents.back());
 	Managers::Filemanager fileman;
+	fileman.Init();
 	return 1;
 }

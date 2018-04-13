@@ -19,32 +19,29 @@ Filemanager::Filemanager()
 void Filemanager::Init()
 {
   //List all directories, then get all files.
-  GetFolders(filepath);
-  GetFiles(filepath);
+  LoadFolders(filepath);
 }
 
-void Filemanager::GetFolders(const std::string path)
+void Filemanager::LoadFolders(const std::string path)
 {
   std::vector<std::string> vector;
   read_directory(path,vector);
   for(auto& value : vector)
   {
-    if(is_dir(value.c_str())) {
-      fprintf(stderr, "%s\n", value.c_str());
-      directories.emplace_back(value,path);
+    if(is_dir((path+"/"+value).c_str())) {
+      if(value.compare(std::string(".."))==0 || value.compare(std::string("."))==0){
+      }
+      else {
+        directories.emplace_back(value,path);
+      }
     }
   }
 }
 
-void Filemanager::GetFiles(const std::string path)
+void Filemanager::GetAllFilesOfType(std::vector<File>& allfiles,Filetype type)
 {
-  std::vector<std::string> vector;
-  read_directory(path,vector);
-  for(auto& value : vector)
+  for(auto& dir : directories)
   {
-    if(is_file(value.c_str())) {
-      fprintf(stderr, "%s\n", value.c_str());
-      files.emplace_back(value,path);
-    }
+    Directory::GetAllFilesOfType(type,dir,allfiles);
   }
 }
