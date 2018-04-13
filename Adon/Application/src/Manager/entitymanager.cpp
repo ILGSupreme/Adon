@@ -1,16 +1,22 @@
 #include "entitymanager.h"
 #include "entity.h"
+#include "fileconfig.h"
 
 using namespace Adon::Application;
 using namespace tinyxml2;
 
 EntityManager::EntityManager()
 {
+  run_thread = true;
 }
 
 EntityManager::~EntityManager()
 {
   //empty code
+  if(t1.joinable())
+  {
+    t1.join();
+  }
 }
 
 void EntityManager::Init()
@@ -34,6 +40,16 @@ void EntityManager::Init()
   }
 
   ParseAllDocs();
+}
+
+void EntityManager::Run()
+{
+    t1 = std::thread(&EntityManager::Update,this);
+}
+
+void EntityManager::Stop()
+{
+  run_thread = false;
 }
 
 XMLError EntityManager::ParseAllDocs()
@@ -104,4 +120,48 @@ XMLError EntityManager::ParseDoc(const XML::Data& data)
     printf("%s\n", "Not Scripts XML File");
   }
   return XMLError::XML_ERROR_FILE_READ_ERROR;
+}
+
+bool EntityManager::HaveDir(std::string path)
+{
+  for(auto& dir : directories)
+  {
+    //fprintf(stderr, "EntityManager: %s\n", (filepath+"/"+value).c_str());
+    if(dir == path) {return true;}
+  }
+  return false;
+}
+
+bool EntityManager::IsDirDot(const std::string& path)
+{
+  if (path.compare(std::string(".."))==0 || path.compare(std::string("."))==0) {
+    return true;
+  }
+  return false;
+}
+
+void EntityManager::Update()
+{
+  while (run_thread) {
+
+    std::vector<std::string> tempfiles;
+    bool tempbool = false;
+    read_directory(filepath,tempfiles);
+    for(auto& value : tempfiles)
+    {
+      if(!is_file((filepath+"/"+value).c_str())) {
+        if(!IsDirDot(value) && !HaveDir(filepath+"/"+value)) tempbool = true;
+      }
+      if(tempbool) {
+        fprintf(stderr, "%s\n", "EntityManager: Found a new folder!");
+        //directories.emplace_back(value,filepath);
+        tempbool = false;
+      }
+    }
+    for(auto& dir : directories)
+    {
+      dir.Update();
+    }
+  }
+  fprintf(stderr, "%s\n", "closing thread");
 }

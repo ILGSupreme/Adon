@@ -31,6 +31,7 @@ namespace Adon
      void AdonApp::Close()
     {
       App::Close();
+      //entitymanager.Stop();
       delete this->window;
     }
 
@@ -41,6 +42,7 @@ namespace Adon
 
      void AdonApp::Run()
     {
+      //entitymanager.Run();
       while(this->window->IsOpen())
       {
         //run code..

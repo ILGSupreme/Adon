@@ -32,7 +32,7 @@ elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 	message(STATUS "OPENGL_XMESA_FOUND=${OPENGL_XMESA_FOUND}")
 	message(STATUS "OPENGL_gl_LIBRARY=${OPENGL_gl_LIBRARY}")
 	message(STATUS "OPENGL_glu_LIBRARY=${OPENGL_glu_LIBRARY}")
-	set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1z")
+	set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1z -pthread")
 else(${CMAKE_SYSTEM_NAME} MATCHES "Android")
 endif()
 
