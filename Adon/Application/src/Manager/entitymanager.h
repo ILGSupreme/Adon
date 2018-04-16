@@ -21,8 +21,6 @@ namespace Adon
       void Stop();
     private:
       void Update();
-      bool HaveDir(std::string path);
-      bool IsDirDot(const std::string& path);
       XMLError ParseAllDocs();
       XMLError ParseDoc(const XML::Data&);
       std::thread t1;

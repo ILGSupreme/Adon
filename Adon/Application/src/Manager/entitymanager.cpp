@@ -22,10 +22,9 @@ EntityManager::~EntityManager()
 void EntityManager::Init()
 {
   std::vector<File> xmlfiles;
-  Adon::AdonObjects::Managers::Filemanager::Init();
   Adon::AdonObjects::Managers::Filemanager::GetAllFilesOfType(xmlfiles,Filetype::XML);
 
-  fprintf(stderr, "%lu\n", xmlfiles.size());
+  fprintf(stderr, "EntityManager::Init: size of xml vector %lu\n", xmlfiles.size());
   for(auto& file : xmlfiles)
   {
       fprintf(stderr, "%s\n", file.GetFullPath().c_str());
@@ -122,46 +121,11 @@ XMLError EntityManager::ParseDoc(const XML::Data& data)
   return XMLError::XML_ERROR_FILE_READ_ERROR;
 }
 
-bool EntityManager::HaveDir(std::string path)
-{
-  for(auto& dir : directories)
-  {
-    //fprintf(stderr, "EntityManager: %s\n", (filepath+"/"+value).c_str());
-    if(dir == path) {return true;}
-  }
-  return false;
-}
-
-bool EntityManager::IsDirDot(const std::string& path)
-{
-  if (path.compare(std::string(".."))==0 || path.compare(std::string("."))==0) {
-    return true;
-  }
-  return false;
-}
-
 void EntityManager::Update()
 {
-  while (run_thread) {
-
-    std::vector<std::string> tempfiles;
-    bool tempbool = false;
-    read_directory(filepath,tempfiles);
-    for(auto& value : tempfiles)
-    {
-      if(!is_file((filepath+"/"+value).c_str())) {
-        if(!IsDirDot(value) && !HaveDir(filepath+"/"+value)) tempbool = true;
-      }
-      if(tempbool) {
-        fprintf(stderr, "%s\n", "EntityManager: Found a new folder!");
-        //directories.emplace_back(value,filepath);
-        tempbool = false;
-      }
-    }
-    for(auto& dir : directories)
-    {
-      dir.Update();
-    }
+  while(run_thread)
+  {
+    directory.get()->Update();
+    std::this_thread::sleep_for(5s);
   }
-  fprintf(stderr, "%s\n", "closing thread");
 }

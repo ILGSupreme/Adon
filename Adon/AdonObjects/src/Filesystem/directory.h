@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 #include "file.h"
 
 namespace Adon
@@ -14,7 +15,7 @@ namespace Adon
       class Directory
       {
       public:
-        Directory(const std::string name,const std::string path);
+        Directory(const std::string name,const std::string path, bool deepSearch=true);
         const std::string GetPath();
         const std::string GetName();
         const std::vector<Directory>& GetDirectories();
@@ -29,7 +30,7 @@ namespace Adon
         void Update();
         bool HaveDir(std::string path);
         bool IsDirDot(const std::string& path);
-        static void GetAllFilesOfType(Filetype,Directory,std::vector<File>&);
+        static void GetAllFilesOfType(Filetype,std::unique_ptr<Directory>&,std::vector<File>&);
       private:
         const std::string name;
         const std::string path;

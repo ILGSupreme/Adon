@@ -5,6 +5,7 @@
 #include <config.h>
 #include <string>
 #include <vector>
+#include <memory>
 #include "directory.h"
 #include "file.h"
 
@@ -20,12 +21,10 @@ namespace Adon
       {
       public:
         Filemanager();
-        void Init();
-        void LoadFolders(const std::string path);
         void GetAllFilesOfType(std::vector<File>&,Filetype);
       protected:
         std::string filepath;
-        std::vector<Directory> directories;
+        std::unique_ptr<Directory> directory;
       };
     }
   }
