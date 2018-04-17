@@ -26,13 +26,13 @@ namespace Adon
       class ADONOBJECTS_EXPORT XMLManager
       {
       public:
-        XMLError ParseFile(const std::string filename);
+        XMLError ParseFile(const std::string filename,const std::string unique_id);
         virtual XMLError ParseDoc(const XML::Data& data);
         virtual XMLError ParseAllDocs() {}
-        std::vector<XML::Data> documents;
-        std::map<int,Container_Vector> containers;
-        std::map<int,Model_Vector> models;
-        std::map<int,Script_Vector> scripts;
+        std::vector<unique_ptr<XML::Data>> documents;
+        std::map<std::string,Container_Vector> containers;
+        std::map<std::string,Model_Vector> models;
+        std::map<std::string,Script_Vector> scripts;
       };
     }
   }

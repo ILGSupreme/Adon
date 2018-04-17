@@ -6,8 +6,6 @@
 #include <string>
 #include <config.h>
 
-typedef int32  containerId;
-
 namespace Adon
 {
   namespace AdonObjects
@@ -18,11 +16,12 @@ namespace Adon
       {
         class ADONOBJECTS_EXPORT XMLBase
         {
+        public:
+          std::string GetDocID() {return this->document_id;}
         protected:
-          int32 GetDocID() {return this->document_id;}
-          void SetDocID(int32 document_id) {this->document_id = document_id;}
+          void SetDocID(std::string document_id) {this->document_id = std::string(document_id);}
 
-          int32 document_id;
+          std::string document_id;
         };
       }
     }

@@ -16,7 +16,7 @@ namespace Adon
         class ADONOBJECTS_EXPORT  Script : private XML::Classes::XMLObject
         {
         public:
-          Script(const std::string objectID,int32 documentID);
+          Script(const std::string objectID,std::string documentID);
         };
       }
     }

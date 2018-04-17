@@ -17,12 +17,18 @@ namespace Adon
         std::string GetPath();
         std::string GetName();
         std::string GetFullPath();
+        std::string GetUniqueID();
+        void SetParsed(bool);
+        bool isParsed();
         bool operator==(Filetype);
+        bool operator==(std::string value);
       private:
         void GetFileType();
         std::string name;
         std::string path;
+        std::string unique_id;
         Filetype type;
+        bool parsed;
       };
     }
   }

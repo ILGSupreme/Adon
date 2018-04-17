@@ -2,11 +2,11 @@
 
 using namespace Adon::AdonObjects::XML::Classes;
 
-Container::Container(const std::string objectID,int32 documentID,
+Container::Container(const std::string objectID,std::string documentId,
   const XMLAttribute*& contattr,const XMLAttribute*& scriptattr,
   const XMLAttribute*& modelattr) : cont_attr_id(contattr),script_attr_id(scriptattr),model_attr_id(modelattr)
 {
-  XMLBase::SetDocID(documentID);
+  XMLBase::SetDocID(documentId);
   XMLObject::SetObjectID(objectID);
 }
 

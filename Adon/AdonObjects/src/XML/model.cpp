@@ -2,7 +2,7 @@
 
 using namespace Adon::AdonObjects::XML::Classes;
 
-Model::Model(const std::string objectID,int32 documentID)
+Model::Model(const std::string objectID,std::string documentID)
 {
   XMLBase::SetDocID(documentID);
   XMLObject::SetObjectID(objectID);

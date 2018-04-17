@@ -25,10 +25,11 @@ namespace Adon
         bool Exists();
         bool operator==(std::string other);
 
-        void LoadFolders(const std::string path);
+        void LoadFolders(const std::string path,bool deepSearch=true);
         void LoadFiles(const std::string path);
         void Update();
         bool HaveDir(std::string path);
+        bool HaveFile(std::string path);
         bool IsDirDot(const std::string& path);
         static void GetAllFilesOfType(Filetype,std::unique_ptr<Directory>&,std::vector<File>&);
       private:

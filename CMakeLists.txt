@@ -9,6 +9,14 @@ message(STATUS "CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}")
 message(STATUS "CMAKE_MODULE_PATH=${CMAKE_MODULE_PATH}")
 Find_Package(macros REQUIRED)
 
+set(CMAKE_CXX_STANDARD 17)
+
+# using pkg-config to configure uuid
+find_package(PkgConfig REQUIRED)
+find_package(Threads REQUIRED)
+
+pkg_search_module(UUID REQUIRED uuid)
+
 if(${CMAKE_BUILD_TYPE} MATCHES "Debug")
 	add_definitions(-DDebug)
 endif()
@@ -22,7 +30,6 @@ if(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
 	message(STATUS "OPENGL_XMESA_FOUND=${OPENGL_XMESA_FOUND}")
 	message(STATUS "OPENGL_gl_LIBRARY=${OPENGL_gl_LIBRARY}")
 	message(STATUS "OPENGL_glu_LIBRARY=${OPENGL_glu_LIBRARY}")
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1z")
 elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 	find_package(OpenGL)
@@ -32,7 +39,6 @@ elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 	message(STATUS "OPENGL_XMESA_FOUND=${OPENGL_XMESA_FOUND}")
 	message(STATUS "OPENGL_gl_LIBRARY=${OPENGL_gl_LIBRARY}")
 	message(STATUS "OPENGL_glu_LIBRARY=${OPENGL_glu_LIBRARY}")
-	set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1z -pthread")
 else(${CMAKE_SYSTEM_NAME} MATCHES "Android")
 endif()
 
@@ -42,6 +48,7 @@ SET(ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 SET(PROJECT_LIB_DIR ${ROOT_DIR}/output/lib)
 SET(PROJECT_BIN_DIR ${ROOT_DIR}/output/bin)
 SET(PROJECT_EXPORT_DIR ${ROOT_DIR}/output/exports)
+SET(PROJECT_LIB_INCLUDES ${UUID_INCLUDE_DIRS} ${OPENGL_INCLUDE_DIR})
 SET(EXTS_INCLUDES_DIR ${CMAKE_CURRENT_SOURCE_DIR}/output/includes)
 
 #GLOBAL FILES

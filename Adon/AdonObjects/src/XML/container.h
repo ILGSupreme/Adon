@@ -15,11 +15,11 @@ namespace Adon
     {
       namespace Classes
       {
-        class ADONOBJECTS_EXPORT  Container : private XML::Classes::XMLObject
+        class ADONOBJECTS_EXPORT  Container : protected XML::Classes::XMLObject
         {
         public:
           Container(){}
-          Container(const std::string objectID,int32 documentID,
+          Container(const std::string objectID,std::string document_id,
             const XMLAttribute*& contattr,const XMLAttribute*& scriptattr,
             const XMLAttribute*& modelattr);
 

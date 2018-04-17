@@ -3,10 +3,10 @@
 using namespace Adon::AdonObjects;
 
 Adon::Application::Entity::Entity(
-  const std::string objectID,int32 documentID,const XMLAttribute*& contattr,
-  const XMLAttribute*& scriptattr,const XMLAttribute*& modelattr)
+  const std::string objectID,std::string documentId,const XMLAttribute*& contattr,
+  const XMLAttribute*& scriptattr,const XMLAttribute*& modelattr) : Container(objectID,documentId,contattr,scriptattr,modelattr)
 {
-  Adon::AdonObjects::XML::Classes::Container(objectID,documentID,contattr,scriptattr,modelattr);
+  fprintf(stderr, "Entity created with id %s\n", document_id.c_str());
 }
 
 Adon::Application::Entity::~Entity()

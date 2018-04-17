@@ -21,7 +21,7 @@ namespace Adon
 				Data(){}
 				Data(const Data& dat){}
 				XMLDocument xmldoc;
-				int32 id;
+				std::string unique_id;
 			};
 		}
 	}

@@ -18,7 +18,7 @@ namespace Adon
         class ADONOBJECTS_EXPORT  Model : private XML::Classes::XMLObject
         {
         public:
-          Model(const std::string objectID,int32 documentID);
+          Model(const std::string objectID,std::string documentID);
         };
       }
     }

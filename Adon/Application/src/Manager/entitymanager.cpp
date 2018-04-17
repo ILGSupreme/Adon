@@ -1,8 +1,9 @@
 #include "entitymanager.h"
 #include "entity.h"
-#include "fileconfig.h"
+#include <adonobjects/file.h>
 
 using namespace Adon::Application;
+using namespace Adon::AdonObjects;
 using namespace tinyxml2;
 
 EntityManager::EntityManager()
@@ -23,21 +24,8 @@ void EntityManager::Init()
 {
   std::vector<File> xmlfiles;
   Adon::AdonObjects::Managers::Filemanager::GetAllFilesOfType(xmlfiles,Filetype::XML);
-
-  fprintf(stderr, "EntityManager::Init: size of xml vector %lu\n", xmlfiles.size());
-  for(auto& file : xmlfiles)
-  {
-      fprintf(stderr, "%s\n", file.GetFullPath().c_str());
-      if(ParseFile(file.GetFullPath())!=XML_SUCCESS)
-      {
-        fprintf(stderr, "Cant parse file: %s\n", file.GetName().c_str());
-      }
-      else
-      {
-        fprintf(stderr, "%s\n", "Parsed XML FILE");
-      }
-  }
-
+  fprintf(stderr, "%s\n", "Parsing Files");
+  ParseAllFiles(xmlfiles);
   ParseAllDocs();
 }
 
@@ -55,7 +43,8 @@ XMLError EntityManager::ParseAllDocs()
 {
   XMLError err;
   for (auto& doc :  documents) {
-    err = ParseDoc(doc);
+    err = ParseDoc(*doc.get());
+    fprintf(stderr, "%d\n", err);
   }
   return err;
 }
@@ -66,7 +55,7 @@ XMLError EntityManager::ParseDoc(const XML::Data& data)
   const XMLElement* root = data.xmldoc.FirstChildElement("Containers");
 	if(root!=nullptr)
 	{
-    std::pair<std::map<int,Container_Vector>::iterator,bool> cont_pair = containers.insert(std::map<int,Container_Vector>::value_type(0,Container_Vector()));
+    std::pair<std::map<std::string,Container_Vector>::iterator,bool> cont_pair = containers.insert(std::map<std::string,Container_Vector>::value_type(data.unique_id,Container_Vector()));
     for (const XMLElement* node = root->FirstChildElement(); node != nullptr; node = node->NextSiblingElement()) {
       /* code */
       const XMLAttribute* attr_gui_id = node->FirstAttribute();
@@ -75,7 +64,7 @@ XMLError EntityManager::ParseDoc(const XML::Data& data)
       fprintf(stderr, "%s %s %s\n", attr_gui_id->Value(),attr_script_id->Value(),attr_model_id->Value());
       (*cont_pair.first).second.emplace_back(
         new Adon::Application::Entity(
-          std::string(node->Value()),0,attr_gui_id,attr_script_id,attr_model_id));
+          std::string(node->Value()),data.unique_id,attr_gui_id,attr_script_id,attr_model_id));
 			}
 
       return XML_SUCCESS;
@@ -119,6 +108,31 @@ XMLError EntityManager::ParseDoc(const XML::Data& data)
     printf("%s\n", "Not Scripts XML File");
   }
   return XMLError::XML_ERROR_FILE_READ_ERROR;
+}
+
+void EntityManager::ParseAllFiles(std::vector<Adon::AdonObjects::Filesystem::File>& files)
+{
+  fprintf(stderr, "XMLManager::Init: size of xml vector %lu\n", files.size());
+  for(auto& file : files)
+  {
+      fprintf(stderr, "%s\n", file.GetFullPath().c_str());
+      if(!file.isParsed())
+      {
+        if(ParseFile(file.GetFullPath(),file.GetUniqueID())!=XML_SUCCESS)
+        {
+          fprintf(stderr, "Cant parse file: %s\n", file.GetName().c_str());
+        }
+        else
+        {
+          file.SetParsed(true);
+          fprintf(stderr, "%s\n", "Parsed XML FILE");
+        }
+      }
+      else
+      {
+        fprintf(stderr, "%s\n", "file has been already been parsed");
+      }
+    }
 }
 
 void EntityManager::Update()

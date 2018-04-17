@@ -22,7 +22,8 @@ namespace Adon
     private:
       void Update();
       XMLError ParseAllDocs();
-      XMLError ParseDoc(const XML::Data&);
+      void ParseAllFiles(std::vector<Filesystem::File>&);
+      XMLError ParseDoc(const XML::Data&);      
       std::thread t1;
       bool run_thread;
     };

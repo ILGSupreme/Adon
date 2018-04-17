@@ -13,9 +13,9 @@ using namespace Adon::Exception;
 
 int main()
 {
-	Managers::XMLManager manager;
-	manager.ParseFile("xmltestfile.xml");
-	manager.ParseDoc(manager.documents.back());
 	Managers::Filemanager fileman;
+	Managers::XMLManager manager;
+	manager.ParseFile("xmltestfile.xml","THUTGAT");
+	manager.ParseDoc(*manager.documents.back().get());
 	return 1;
 }

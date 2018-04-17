@@ -2,17 +2,20 @@
 
 using namespace Adon::AdonObjects::Managers;
 using namespace tinyxml2;
+using namespace Adon::AdonObjects::XML;
 
-XMLError XMLManager::ParseFile(const std::string filename)
+XMLError XMLManager::ParseFile(const std::string filename,const std::string unique_id)
 {
-  documents.emplace_back();
-  XMLError error = documents.back().xmldoc.LoadFile(filename.c_str());
-
+  unique_ptr<Data> ptr = std::make_unique<Data>();
+  documents.push_back(std::move(ptr));
+  XMLError error = documents.back().get()->xmldoc.LoadFile(filename.c_str());
+  documents.back().get()->unique_id = unique_id;
   if(error != XML_SUCCESS)
   {
     documents.pop_back();
     printf("Error reading file %s\n",filename.c_str());
   }
+  fprintf(stderr, "Parsing gave this result %d\n", error);
   return error;
 }
 

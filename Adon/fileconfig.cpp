@@ -26,7 +26,22 @@ void read_directory(const std::string& name, std::vector<std::string>& v)
     FindClose(hFind);
   }
 }
+
+void generate_unique_id(std::string& unique_id)
+{
+}
+
 #else
+
+void generate_unique_id(std::string& unique_id)
+{
+  uuid_t id;
+  uuid_generate(id);
+  char uuid_str[37];
+  uuid_unparse(id, uuid_str);
+  unique_id = std::string(uuid_str);
+}
+
 void read_directory(const std::string& name, std::vector<std::string>& v)
 {
     DIR* dirp = opendir(name.c_str());

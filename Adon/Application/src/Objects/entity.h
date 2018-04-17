@@ -10,7 +10,7 @@ namespace Adon
     class Entity : public AdonObjects::XML::Classes::Container
     {
     public:
-      Entity(const std::string objectID,int32 documentID,
+      Entity(const std::string objectID,std::string doc_unique_id,
         const XMLAttribute*& contattr,const XMLAttribute*& scriptattr,
         const XMLAttribute*& modelattr);
       ~Entity();
