@@ -2,11 +2,9 @@
 
 using namespace Adon::AdonObjects;
 
-Adon::Application::Entity::Entity(
-  const std::string objectID,std::string documentId,const XMLAttribute*& contattr,
-  const XMLAttribute*& scriptattr,const XMLAttribute*& modelattr) : Container(objectID,documentId,contattr,scriptattr,modelattr)
+Adon::Application::Entity::Entity(std::string cont_id,std::string script_id,std::string model_id) : Container(cont_id,script_id,model_id)
 {
-  fprintf(stderr, "Entity created with id %s\n", document_id.c_str());
+  fprintf(stderr, "Entity created with id %s\n", cont_attr_id.c_str());
 }
 
 Adon::Application::Entity::~Entity()

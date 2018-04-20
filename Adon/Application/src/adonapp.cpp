@@ -45,6 +45,7 @@ namespace Adon
       entitymanager.Run();
       while(this->window->IsOpen())
       {
+        entitymanager.UpdateEntitiesThread();
         //run code..
         this->window->Update();
         this->window->SwapBuffers();

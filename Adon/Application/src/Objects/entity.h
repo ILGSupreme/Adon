@@ -7,12 +7,10 @@ namespace Adon
 {
   namespace Application
   {
-    class Entity : public AdonObjects::XML::Classes::Container
+    class Entity : public Adon::AdonObjects::XML::Classes::Container
     {
     public:
-      Entity(const std::string objectID,std::string doc_unique_id,
-        const XMLAttribute*& contattr,const XMLAttribute*& scriptattr,
-        const XMLAttribute*& modelattr);
+      Entity(std::string,std::string,std::string);
       ~Entity();
     private:
     };

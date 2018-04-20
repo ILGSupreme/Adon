@@ -6,8 +6,6 @@
 #include <vector>
 #include <string>
 #include <memory>
-#include "xmlbase.h"
-#include "xmlobject.h"
 
 namespace Adon
 {
@@ -15,13 +13,10 @@ namespace Adon
 	{
 		namespace XML
 		{
-			class Data
-			{
-			public:
-				Data(){}
-				Data(const Data& dat){}
-				XMLDocument xmldoc;
-				std::string unique_id;
+			struct Container {
+				std::string attr_gui_id;
+				std::string attr_model_id;
+				std::string attr_script_id;
 			};
 		}
 	}

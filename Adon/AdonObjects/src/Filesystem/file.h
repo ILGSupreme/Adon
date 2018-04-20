@@ -22,6 +22,7 @@ namespace Adon
         bool isParsed();
         bool operator==(Filetype);
         bool operator==(std::string value);
+        bool operator < (const File& other) const;
       private:
         void GetFileType();
         std::string name;

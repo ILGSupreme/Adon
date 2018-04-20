@@ -3,7 +3,6 @@
 
 #include <adonobjects_exports.h>
 #include <string>
-#include "xmlobject.h"
 
 namespace Adon
 {
@@ -13,10 +12,10 @@ namespace Adon
     {
       namespace Classes
       {
-        class ADONOBJECTS_EXPORT  Script : private XML::Classes::XMLObject
+        class ADONOBJECTS_EXPORT  Script
         {
         public:
-          Script(const std::string objectID,std::string documentID);
+          Script();
         };
       }
     }

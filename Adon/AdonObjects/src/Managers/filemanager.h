@@ -6,10 +6,9 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <mutex>
 #include "directory.h"
 #include "file.h"
-
-using namespace Adon::AdonObjects::Filesystem;
 
 namespace Adon
 {
@@ -21,10 +20,12 @@ namespace Adon
       {
       public:
         Filemanager();
-        void GetAllFilesOfType(std::vector<File>&,Filetype);
+        void GetAllFilesOfType(std::vector<std::shared_ptr<Adon::AdonObjects::Filesystem::File>>&,Adon::AdonObjects::Filesystem::Filetype);
+        void GetNewFiles(std::vector<std::shared_ptr<Adon::AdonObjects::Filesystem::File>>&,Adon::AdonObjects::Filesystem::Filetype);
       protected:
         std::string filepath;
-        std::unique_ptr<Directory> directory;
+        std::shared_ptr<Adon::AdonObjects::Filesystem::Directory> directory;
+        std::vector<std::shared_ptr<Adon::AdonObjects::Filesystem::File>> newfiles;
       };
     }
   }

@@ -4,6 +4,9 @@
 #include <adonobjects/xmlmanager.h>
 #include <adonobjects/filemanager.h>
 #include <thread>
+#include <atomic>
+#include <memory>
+#include "entity.h"
 
 using namespace Adon::AdonObjects;
 
@@ -19,13 +22,14 @@ namespace Adon
       void Init();
       void Run();
       void Stop();
+      void UpdateEntitiesThread();
     private:
-      void Update();
-      XMLError ParseAllDocs();
-      void ParseAllFiles(std::vector<Filesystem::File>&);
-      XMLError ParseDoc(const XML::Data&);      
+      void SearhDirectoriesUpdate_Thread();
+      void ParseUpdate_Thread();
       std::thread t1;
-      bool run_thread;
+      std::thread t2;
+      std::atomic<bool> run_thread;
+      std::vector<std::shared_ptr<Entity>> entities;
     };
   }
 }

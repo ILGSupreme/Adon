@@ -15,7 +15,7 @@ int main()
 {
 	Managers::Filemanager fileman;
 	Managers::XMLManager manager;
-	manager.ParseFile("xmltestfile.xml","THUTGAT");
-	manager.ParseDoc(*manager.documents.back().get());
+	//manager.ParseFile("xmltestfile.xml","THUTGAT");
+	//manager.ParseDoc(*manager.documents.back().get());
 	return 1;
 }

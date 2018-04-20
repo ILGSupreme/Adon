@@ -62,3 +62,8 @@ bool File::operator==(std::string path)
 {
   return ((GetFullPath().compare(path))==0);
 }
+
+bool File::operator<(const Adon::AdonObjects::Filesystem::File &other) const
+{
+  return (parsed != other.parsed);
+}

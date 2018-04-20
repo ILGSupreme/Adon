@@ -1,5 +1,6 @@
 #include "directory.h"
 #include "fileconfig.h"
+#include <algorithm>
 
 using namespace Adon::AdonObjects::Filesystem;
 
@@ -39,7 +40,7 @@ void Directory::LoadFolders(const std::string path,bool deepSearch)
       if (!IsDirDot(value) && !HaveDir(path+"/"+value)) tempbol = true;
     }
     if(tempbol) {
-      directories.emplace_back(value,path,deepSearch);
+      directories.emplace_back(new Directory(value,path,deepSearch));
       tempbol = false;
     }
   }
@@ -53,7 +54,7 @@ void Directory::LoadFiles(const std::string path)
   {
     if(is_file((path+"/"+value).c_str())) {
       if (!HaveFile(path+"/"+value)) {
-        files.emplace_back(value,path);
+        files.emplace_back(new File(value,path));
       }
     }
   }
@@ -64,12 +65,12 @@ bool Directory::Exists()
   return is_dir(GetFullPath().c_str());
 }
 
-std::vector<File>& Directory::GetFiles()
+std::vector<std::shared_ptr<File>>& Directory::GetFiles()
 {
   return files;
 }
 
-const std::vector<Directory>& Directory::GetDirectories()
+std::vector<std::shared_ptr<Directory>>& Directory::GetDirectories()
 {
   return directories;
 }
@@ -79,19 +80,33 @@ bool Directory::operator==(std::string other)
   return ((GetFullPath().compare(other))==0);
 }
 
-void Directory::GetAllFilesOfType(Filetype type,std::unique_ptr<Directory>& ptr,std::vector<File>& allfiles)
+void Directory::GetAllFilesOfType(Filetype type,std::shared_ptr<Directory>& ptr,std::vector<std::shared_ptr<File>>& allfiles)
 {
-  for(auto& file : ptr.get()->GetFiles())
+  for(auto file : ptr.get()->GetFiles())
   {
-    if(file==type)
+    if(*file.get()==type)
     {
       allfiles.push_back(file);
     }
   }
-  for(auto& dir : ptr.get()->GetDirectories())
+  for(auto dir : ptr.get()->GetDirectories())
   {
-    std::unique_ptr<Directory> tempPtr = std::make_unique<Directory>(dir);
-    Directory::GetAllFilesOfType(type, tempPtr, allfiles);
+    Directory::GetAllFilesOfType(type, dir, allfiles);
+  }
+}
+
+void Directory::GetNewFiles(Adon::AdonObjects::Filesystem::Filetype type, std::shared_ptr<Directory> & current_dir, std::vector<std::shared_ptr<File>> & newfiles)
+{
+  for(auto file : current_dir.get()->GetFiles())
+  {
+    if(*(file.get())==type && !(file.get()->isParsed()))
+    {
+      newfiles.push_back(file);
+    }
+  }
+  for(auto dir : current_dir.get()->GetDirectories())
+  {
+    Directory::GetNewFiles(type, dir, newfiles);
   }
 }
 
@@ -99,7 +114,7 @@ bool Directory::HaveDir(std::string path)
 {
   for(auto& dir : directories)
   {
-    if(dir == path) {return true;}
+    if(*dir == path) {return true;}
   }
   return false;
 }
@@ -108,7 +123,7 @@ bool Directory::HaveFile(std::string path)
 {
   for(auto& file : files)
   {
-    if(file == path) {return true;}
+    if(*file == path) {return true;}
   }
   return false;
 }
@@ -121,13 +136,18 @@ bool Directory::IsDirDot(const std::string& path)
   return false;
 }
 
+void Directory::SortFiles()
+{
+  std::sort(files.begin(),files.end());
+}
 
 void Directory::Update()
 {
   LoadFiles(GetFullPath());
+  SortFiles();
   LoadFolders(GetFullPath(),false);
   for(auto& dir : directories)
   {
-    dir.Update();
+    dir->Update();
   }
 }

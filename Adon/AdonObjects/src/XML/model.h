@@ -3,9 +3,6 @@
 
 #include <adonobjects_exports.h>
 #include <string>
-#include "xmlobject.h"
-
-using namespace tinyxml2;
 
 namespace Adon
 {
@@ -15,10 +12,10 @@ namespace Adon
     {
       namespace Classes
       {
-        class ADONOBJECTS_EXPORT  Model : private XML::Classes::XMLObject
+        class ADONOBJECTS_EXPORT  Model
         {
         public:
-          Model(const std::string objectID,std::string documentID);
+          Model();
         };
       }
     }

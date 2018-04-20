@@ -2,8 +2,6 @@
 
 using namespace Adon::AdonObjects::XML::Classes;
 
-Script::Script(const std::string objectID,std::string documentID)
+Script::Script()
 {
-  XMLBase::SetDocID(documentID);
-  XMLObject::SetObjectID(objectID);
 }

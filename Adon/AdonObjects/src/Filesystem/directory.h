@@ -18,8 +18,8 @@ namespace Adon
         Directory(const std::string name,const std::string path, bool deepSearch=true);
         const std::string GetPath();
         const std::string GetName();
-        const std::vector<Directory>& GetDirectories();
-        std::vector<File>& GetFiles();
+        std::vector<std::shared_ptr<Directory>>& GetDirectories();
+        std::vector<std::shared_ptr<File>>& GetFiles();
         std::string GetFullPath();
 
         bool Exists();
@@ -31,12 +31,14 @@ namespace Adon
         bool HaveDir(std::string path);
         bool HaveFile(std::string path);
         bool IsDirDot(const std::string& path);
-        static void GetAllFilesOfType(Filetype,std::unique_ptr<Directory>&,std::vector<File>&);
+        static void GetAllFilesOfType(Filetype,std::shared_ptr<Directory>&,std::vector<std::shared_ptr<File>>&);
+        static void GetNewFiles(Filetype,std::shared_ptr<Directory>&,std::vector<std::shared_ptr<File>>&);
       private:
+        void SortFiles();
         const std::string name;
         const std::string path;
-        std::vector<Directory> directories;
-        std::vector<File> files;
+        std::vector<std::shared_ptr<Directory>> directories;
+        std::vector<std::shared_ptr<File>> files;
       };
     }
   }
