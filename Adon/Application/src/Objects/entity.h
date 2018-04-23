@@ -10,7 +10,7 @@ namespace Adon
     class Entity : public Adon::AdonObjects::XML::Classes::Container
     {
     public:
-      Entity(std::string,std::string,std::string);
+      Entity(std::string,std::string,std::string,std::string);
       ~Entity();
     private:
     };

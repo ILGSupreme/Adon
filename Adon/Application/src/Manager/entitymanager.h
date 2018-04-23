@@ -9,6 +9,7 @@
 #include "entity.h"
 
 using namespace Adon::AdonObjects;
+typedef std::map<std::string,std::shared_ptr<Adon::Application::Entity>> entity_set;
 
 namespace Adon
 {
@@ -24,12 +25,12 @@ namespace Adon
       void Stop();
       void UpdateEntitiesThread();
     private:
-      void SearhDirectoriesUpdate_Thread();
+      void SearchDirectoriesUpdate_Thread();
       void ParseUpdate_Thread();
       std::thread t1;
       std::thread t2;
       std::atomic<bool> run_thread;
-      std::vector<std::shared_ptr<Entity>> entities;
+      std::map<std::string,entity_set> entities;
     };
   }
 }

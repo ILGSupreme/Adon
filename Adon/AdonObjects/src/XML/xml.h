@@ -14,9 +14,11 @@ namespace Adon
 		namespace XML
 		{
 			struct Container {
-				std::string attr_gui_id;
-				std::string attr_model_id;
+				std::string attr_cont_id;
 				std::string attr_script_id;
+				std::string attr_model_id;
+				std::string unique_id;
+				std::string unique_guid;
 			};
 		}
 	}

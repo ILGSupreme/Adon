@@ -1,5 +1,6 @@
 #include "xmlmanager.h"
 #include "atom.h"
+#include "fileconfig.h"
 
 using namespace Adon::AdonObjects::Managers;
 using namespace Adon::AdonObjects::XML;
@@ -24,7 +25,8 @@ XMLError XMLManager::ParseFile(const std::string filename,const std::string uniq
       const XMLAttribute* attr_script_id = node->FirstChildElement()->FirstAttribute();
       const XMLAttribute* attr_model_id = node->FirstChildElement()->NextSiblingElement()->FirstAttribute();
       fprintf(stderr, "%s %s %s\n", attr_gui_id->Value(),attr_script_id->Value(),attr_model_id->Value());
-      Container cont = {attr_gui_id->Value(),attr_model_id->Value(),attr_script_id->Value()};
+      Container cont = {attr_gui_id->Value(),attr_model_id->Value(),attr_script_id->Value(),unique_id};
+      generate_unique_id(cont.unique_guid);
       container_map.insert(std::pair<std::string,std::shared_ptr<cont_pair>>(unique_id,std::make_shared<cont_pair>(cont_pair(attr_gui_id->Value(),cont))));
     }
     return XML_SUCCESS;

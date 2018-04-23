@@ -16,7 +16,7 @@ namespace Adon
         {
         public:
           Container();
-          Container(std::string cont_id,std::string script_id,std::string model_id);
+          Container(std::string cont_id,std::string script_id,std::string model_id,std::string unique_guid);
 
           void ChangeContainerValue(std::string value);
           void ChangeScriptValue(std::string value);
@@ -25,11 +25,13 @@ namespace Adon
           std::string GetContainerValue();
           std::string GetScriptValue();
           std::string GetModelValue();
+          std::string GetUniqueGUID();
 
         protected:
           std::string cont_attr_id;
           std::string script_attr_id;
           std::string model_attr_id;
+          std::string unique_guid;
         };
       }
     }

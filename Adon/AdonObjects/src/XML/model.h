@@ -15,7 +15,7 @@ namespace Adon
         class ADONOBJECTS_EXPORT  Model
         {
         public:
-          Model();
+          Model();  
         };
       }
     }

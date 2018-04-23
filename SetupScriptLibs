@@ -1,0 +1,9 @@
+#!/bin/bash
+
+curl -R -O http://www.lua.org/ftp/lua-5.3.4.tar.gz
+
+tar zxf lua-5.3.4.tar.gz -C extensions/
+
+mv -f extensions/lua-5.3.4 extensions/lua
+
+rm lua-5.3.4.tar.gz

@@ -29,12 +29,11 @@ EntityManager::~EntityManager()
 
 void EntityManager::Init()
 {
-
 }
 
 void EntityManager::Run()
 {
-    t1 = std::thread(&EntityManager::SearhDirectoriesUpdate_Thread,this);
+    t1 = std::thread(&EntityManager::SearchDirectoriesUpdate_Thread,this);
     t2 = std::thread(&EntityManager::ParseUpdate_Thread,this);
 }
 
@@ -47,12 +46,32 @@ void EntityManager::UpdateEntitiesThread()
 {
   for(auto& _value : container_map)
   {
+    auto inList = false;
     std::pair<std::string,std::shared_ptr<cont_pair>> map_set = _value;
-    //entities.emplace_back(new Entity(map_set.second->second.attr_gui_id,map_set.second->second.attr_model_id,map_set.second->second.attr_script_id));
+    std::shared_ptr<cont_pair> cont = map_set.second;
+    std::map<std::string,entity_set>::iterator it = entities.find(_value.first);
+    if(it!=entities.end())
+    {
+      for(auto& entity_ptr : (*it).second)
+      {
+        if(cont.get()->second.unique_guid.compare(entity_ptr.first)==0)
+        {
+          inList = true;
+        }
+      }
+      if(!inList) {
+        entities.insert(std::pair<std::string,entity_set>(_value.first,entity_set()));
+        entities[_value.first][cont.get()->second.unique_guid] = std::make_shared<Entity>(cont.get()->second.attr_cont_id,cont.get()->second.attr_script_id,cont.get()->second.attr_model_id,cont.get()->second.unique_guid);
+      }
+    }
+    else {
+      entities.insert(std::pair<std::string,entity_set>(_value.first,entity_set()));
+      entities[_value.first][cont.get()->second.unique_guid] = std::make_shared<Entity>(cont.get()->second.attr_cont_id,cont.get()->second.attr_script_id,cont.get()->second.attr_model_id,cont.get()->second.unique_guid);
+    }
   }
 }
 
-void EntityManager::SearhDirectoriesUpdate_Thread()
+void EntityManager::SearchDirectoriesUpdate_Thread()
 {
   while(run_thread)
   {
