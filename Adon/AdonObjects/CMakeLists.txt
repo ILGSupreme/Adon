@@ -40,8 +40,8 @@ target_include_directories(adonobjects PUBLIC ${PROJECT_EXPORT_DIR})
 OS_BUILD_MACRO(adonobjects)
 
 file(MAKE_DIRECTORY ${EXTS_INCLUDES_DIR}/adonobjects)
-add_custom_target(copy_files ALL COMMAND ${CMAKE_COMMAND} -E copy ${APP_HEAD} ${EXTS_INCLUDES_DIR}/adonobjects)
-add_dependencies(copy_files adonobjects)
+add_custom_target(copy_files_shared ALL COMMAND ${CMAKE_COMMAND} -E copy ${APP_HEAD} ${EXTS_INCLUDES_DIR}/adonobjects)
+add_dependencies(copy_files_shared adonobjects)
 endif()
 
 
